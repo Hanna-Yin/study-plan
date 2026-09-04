@@ -79,15 +79,23 @@
 <div class="sub">高数从0 · 英语从0 ｜ 每天高数45min + 英语15min ｜ 做完即停，不求完美</div>
 
 <div class="syncpanel" id="syncPanel">
-  <h2>☁️ 云同步设置（手机/电脑打卡一致）</h2>
-  <p>粘贴 GitHub Token（仅存本机，不上传聊天）。<b>建议用「仅本仓库」范围的 token</b>。连接后，专家在对话里帮你打的卡、你记的错题，会自动同步到每台设备。</p>
-  <input id="token" type="password" placeholder="粘贴 GitHub Token（ghp_... 或 github_pat_...）" autocomplete="off">
-  <div class="btns">
-    <button onclick="connect()">连接并同步</button>
-    <button class="sec" onclick="disconnect()">清除Token</button>
+  <div id="connectArea">
+    <h2>☁️ 云同步设置（手机/电脑打卡一致）</h2>
+    <p>粘贴 GitHub Token（仅存本机，不上传聊天）。<b>建议用「仅本仓库」范围的 token</b>。连接后，专家在对话里帮你打的卡、你记的错题，会自动同步到每台设备。</p>
+    <input id="token" type="password" placeholder="粘贴 GitHub Token（ghp_... 或 github_pat_...）" autocomplete="off">
+    <div class="btns">
+      <button onclick="connect()">连接并同步</button>
+      <button class="sec" onclick="disconnect()">清除Token</button>
+    </div>
+    <div class="syncstatus wait" id="syncStatus">未连接：打卡仅存本机；专家已在本机为你预录 Day1/Day2。</div>
+    <div class="small">仓库固定为 <code>study-plan</code>（自动用你的账号）。数据文件 <code>study-data.json</code> 含进度与错题。</div>
   </div>
-  <div class="syncstatus wait" id="syncStatus">未连接：打卡仅存本机；专家已在本机为你预录 Day1/Day2。</div>
-  <div class="small">仓库固定为 <code>study-plan</code>（自动用你的账号）。数据文件 <code>study-data.json</code> 含进度与错题。</div>
+  <div id="connectedArea" style="display:none">
+    <h2>☁️ 云同步已连接</h2>
+    <div class="syncstatus ok" id="syncStatus2">已连接，打卡与错题自动同步。</div>
+    <div class="small">每台设备（电脑浏览器 / 手机浏览器）首次打开输入一次 token 即可，之后自动连接，无需再输。想换 token 或断开时点下面按钮。</div>
+    <div class="btns"><button class="sec" onclick="disconnect()">断开 / 换 Token</button></div>
+  </div>
 </div>
 
 <div class="card">
@@ -407,18 +415,26 @@ async function connect(){
     if(f){ ghSha=f.sha; localStorage.setItem('gh_sha',ghSha); applyData(f.data); }
     else { await ghPut(collectData()); }
     setStatus('已连接：'+ghRepo+'（打卡与错题自动同步）','ok');
-    document.getElementById('syncPanel').style.display='none';
+    refreshSyncUI();
   }catch(e){ setStatus('连接失败：'+e.message,'bad'); }
 }
 function disconnect(){
   localStorage.removeItem('gh_token'); localStorage.removeItem('gh_repo'); localStorage.removeItem('gh_sha');
   ghToken=''; ghRepo=''; ghSha=''; setStatus('已清除 Token，打卡仅存本机。','wait');
-  document.getElementById('syncPanel').style.display='block';
+  refreshSyncUI();
+}
+function refreshSyncUI(){
+  const connected = !!(ghToken && ghRepo);
+  document.getElementById('connectArea').style.display = connected ? 'none' : 'block';
+  document.getElementById('connectedArea').style.display = connected ? 'block' : 'none';
+  if(connected){ document.getElementById('syncStatus2').textContent = '已连接：'+ghRepo+'（打卡与错题自动同步）'; }
 }
 (async function autoLoad(){
   if(ghToken && ghRepo){
-    try{ const f=await ghGet(); if(f){ ghSha=f.sha; localStorage.setItem('gh_sha',ghSha); applyData(f.data);} setStatus('已连接：'+ghRepo,'ok'); }
+    try{ const f=await ghGet(); if(f){ ghSha=f.sha; localStorage.setItem('gh_sha',ghSha); applyData(f.data);} refreshSyncUI(); setStatus('已连接：'+ghRepo,'ok'); }
     catch(e){ setStatus('云端读取失败，使用本机数据。','bad'); }
+  } else {
+    refreshSyncUI();
   }
 })();
 render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises();
