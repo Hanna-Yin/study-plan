@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>第一周学习计划 · 高数+英语从0</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, "Microsoft YaHei", sans-serif; background:#f7f8fa; color:#1f2329; max-width:780px; margin:0 auto; padding:16px; line-height:1.6; -webkit-text-size-adjust:100%; }
+  h1 { font-size:20px; margin-bottom:4px; }
+  .sub { color:#6b7280; font-size:12px; margin-bottom:12px; }
+  .card { background:#fff; border-radius:12px; padding:16px; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  .card h2 { font-size:16px; margin:0 0 12px; color:#2563eb; }
+  .row { display:flex; align-items:flex-start; gap:12px; padding:12px 0; border-bottom:1px dashed #eee; }
+  .row:last-child { border-bottom:none; }
+  .row input[type=checkbox] { margin-top:2px; width:24px; height:24px; flex-shrink:0; cursor:pointer; accent-color:#2563eb; }
+  .row label { font-size:15px; cursor:pointer; flex:1; }
+  .day { font-weight:700; color:#374151; display:inline-block; width:52px; flex-shrink:0; }
+  .done label { text-decoration: line-through; color:#9ca3af; }
+  .done .day { color:#c4c9d0; }
+  .progress { font-size:13px; color:#2563eb; font-weight:600; margin-top:10px; }
+  .tip { background:#fff7ed; border-left:4px solid #f59e0b; padding:10px 14px; border-radius:6px; font-size:13px; color:#7c4a03; margin-top:8px; }
+  .tip b { color:#b45309; }
+  .btns { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+  button { background:#2563eb; color:#fff; border:none; padding:11px 16px; border-radius:10px; cursor:pointer; font-size:14px; font-weight:600; }
+  button.sec { background:#e5e7eb; color:#374151; }
+  button.sm { padding:7px 12px; font-size:13px; }
+  button:hover { opacity:.9; }
+  .sync { background:#ecfdf5; border-left:4px solid #10b981; padding:10px 14px; border-radius:6px; font-size:13px; color:#065f46; margin-top:8px; }
+  .syncpanel { background:#eef2ff; border:1px solid #c7d2fe; border-radius:12px; padding:14px; margin-bottom:14px; }
+  .syncpanel h2 { color:#4338ca; font-size:15px; margin:0 0 8px; }
+  .syncpanel p { font-size:12px; color:#4338ca; margin:0 0 10px; }
+  .syncpanel input { width:100%; padding:10px; border:1px solid #c7d2fe; border-radius:8px; font-size:13px; margin-bottom:8px; }
+  .syncstatus { font-size:12px; margin-top:8px; }
+  .ok { color:#059669; } .bad { color:#dc2626; } .wait { color:#6b7280; }
+  .small { font-size:11px; color:#9ca3af; margin-top:6px; }
+  code { background:#e5e7eb; padding:1px 5px; border-radius:4px; font-size:12px; }
+  /* 错题本 */
+  .mk-form { display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+  .mk-form select, .mk-form input, .mk-form textarea { padding:9px; border:1px solid #d1d5db; border-radius:8px; font-size:14px; width:100%; font-family:inherit; }
+  .mk-form textarea { resize:vertical; min-height:38px; }
+  .mk-item { border:1px solid #fecaca; background:#fff5f5; border-radius:10px; padding:10px 12px; margin-bottom:10px; }
+  .mk-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .mk-badge { font-size:11px; background:#fee2e2; color:#b91c1c; padding:2px 8px; border-radius:999px; font-weight:600; }
+  .mk-wrong { color:#dc2626; font-size:14px; }
+  .mk-wrong b, .mk-right b { font-size:11px; margin-right:4px; color:#6b7280; font-weight:600; }
+  .mk-right { color:#059669; font-size:14px; margin-top:3px; }
+  .mk-note { font-size:12px; color:#6b7280; margin-top:5px; }
+  .mk-empty { font-size:13px; color:#9ca3af; }
+</style>
+</head>
+<body>
+<h1>第一周启动计划</h1>
+<div class="sub">高数从0 · 英语从0 ｜ 每天高数45min + 英语15min ｜ 做完即停，不求完美</div>
+
+<div class="syncpanel" id="syncPanel">
+  <h2>☁️ 云同步设置（手机/电脑打卡一致）</h2>
+  <p>粘贴 GitHub Token（仅存本机，不上传聊天）。<b>建议用「仅本仓库」范围的 token</b>。连接后，专家在对话里帮你打的卡、你记的错题，会自动同步到每台设备。</p>
+  <input id="token" type="password" placeholder="粘贴 GitHub Token（ghp_... 或 github_pat_...）" autocomplete="off">
+  <div class="btns">
+    <button onclick="connect()">连接并同步</button>
+    <button class="sec" onclick="disconnect()">清除Token</button>
+  </div>
+  <div class="syncstatus wait" id="syncStatus">未连接：打卡仅存本机；专家已在本机为你预录 Day1/Day2。</div>
+  <div class="small">仓库固定为 <code>study-plan</code>（自动用你的账号）。数据文件 <code>study-data.json</code> 含进度与错题。</div>
+</div>
+
+<div class="card">
+  <h2>📐 高数（数二方向 · 从0起步 · 地基周）</h2>
+  <div id="math"></div>
+  <div class="progress" id="mathProg"></div>
+  <div class="tip">每天节奏：前15min让AI讲解+例题 → 中间20min自己做3题 → 后10min核对。<b>只做出1道也算赢。</b></div>
+</div>
+
+<div class="card">
+  <h2>🔤 英语（考研英二 · 从0起步）</h2>
+  <div id="eng"></div>
+  <div class="progress" id="engProg"></div>
+  <div class="tip">每天：APP背15个最基础核心词 + 让AI用当日词造1个简单句并逐词讲。<b>背了词+读了1句就算赢。</b>若音标不会，前两天让AI顺带带过字母发音即可。</div>
+</div>
+
+<div class="card">
+  <h2>📒 错题本（复盘用 · 自动同步）</h2>
+  <div class="mk-form">
+    <select id="mkSub">
+      <option value="高数">高数</option>
+      <option value="英语" selected>英语</option>
+      <option value="其他">其他</option>
+    </select>
+    <input id="mkWrong" placeholder="错误内容（你写的 / 错的题）">
+    <input id="mkRight" placeholder="正确写法">
+    <textarea id="mkNote" placeholder="错因 / 记忆点（可空）"></textarea>
+    <button onclick="addMistake()">保存这条错题</button>
+  </div>
+  <div id="mkList"></div>
+</div>
+
+<div class="sync">💡 进度默认存在本机。已连云同步时，专家帮你打的卡、你记的错题，手机/电脑打开同一网址自动一致。导出/导入可离线备份。</div>
+
+<div class="btns">
+  <button class="sec" onclick="resetAll()">重置勾选</button>
+  <button class="sec" onclick="exportData()">导出数据</button>
+  <button class="sec" onclick="document.getElementById('imp').click()">导入数据</button>
+  <input type="file" id="imp" accept="application/json" style="display:none" onchange="importData(event)">
+</div>
+
+<script>
+const math = [
+ ["Day1","函数的概念：什么是函数、定义域、求函数值（让AI用生活例子讲）"],
+ ["Day2","初等函数：一次/二次/指数/对数/三角函数基础认识"],
+ ["Day3","极限的直观理解：x→a 时 f(x) 趋近什么，配合画图"],
+ ["Day4","极限的性质与四则运算"],
+ ["Day5","重要极限①：(1+1/n)^n→e 的直观含义"],
+ ["Day6","简单极限计算：代入法、约分消零因子"],
+ ["Day7","复盘：重做本周错题，把仍不懂的整理给AI"]
+];
+const eng = [
+ ["Day1","背15个基础词 + AI造1句（如：I read a book. 逐词讲解）"],
+ ["Day2","背15个基础词 + AI造1句（含今日词）"],
+ ["Day3","背15个基础词 + AI造1句（含今日词）"],
+ ["Day4","背15个基础词 + AI造1句（含今日词）"],
+ ["Day5","背15个基础词 + AI造1句（含今日词）"],
+ ["Day6","背15个基础词 + AI造1句（周末多复习前5天）"],
+ ["Day7","复习本周约90个词 + 读1段极简英文"]
+];
+const REPO_NAME = 'study-plan';
+let progress = {};
+let mistakes = [];
+let ghToken = localStorage.getItem('gh_token') || '';
+let ghRepo  = localStorage.getItem('gh_repo') || '';
+let ghSha   = localStorage.getItem('gh_sha') || '';
+
+// 种子：专家已在对话中确认 Day1/Day2 完成 + 2 条语法错题
+const SEED_PROGRESS = { m0:'1', m1:'1', e0:'1', e1:'1' };
+const SEED_MISTAKES = [
+ { date:'2026-09-04', subject:'英语', wrong:'she have a cat and a dog', right:'she has a cat and a dog', note:'she/he/it 是三单，have 要变成 has' },
+ { date:'2026-09-04', subject:'英语', wrong:'They go to eat hamburger', right:'They go to eat a hamburger / hamburgers', note:'hamburger 可数名词，单数前加 a 或变复数' }
+];
+
+// 首跑注入种子
+if(!localStorage.getItem('study_progress')){ progress = Object.assign({}, SEED_PROGRESS); localStorage.setItem('study_progress', JSON.stringify(progress)); }
+else progress = JSON.parse(localStorage.getItem('study_progress')||'{}');
+if(!localStorage.getItem('study_mistakes')){ mistakes = SEED_MISTAKES.slice(); localStorage.setItem('study_mistakes', JSON.stringify(mistakes)); }
+else mistakes = JSON.parse(localStorage.getItem('study_mistakes')||'[]');
+
+function saveLocal(){ localStorage.setItem('study_progress', JSON.stringify(progress)); localStorage.setItem('study_mistakes', JSON.stringify(mistakes)); }
+function render(id, data, key){
+  const box=document.getElementById(id); box.innerHTML='';
+  data.forEach((d,i)=>{
+    const row=document.createElement('div'); row.className='row';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.id=key+i;
+    cb.checked=progress[key+i]==='1';
+    cb.onchange=()=>{ progress[key+i]=cb.checked?'1':'0'; cb.checked?row.classList.add('done'):row.classList.remove('done'); update(); saveLocal(); scheduleSync(); };
+    if(cb.checked) row.classList.add('done');
+    const lab=document.createElement('label'); lab.htmlFor=key+i;
+    lab.innerHTML='<span class="day">'+d[0]+'</span>'+d[1];
+    row.appendChild(cb); row.appendChild(lab); box.appendChild(row);
+  });
+}
+function update(){
+  const m=math.filter((d,i)=>progress['m'+i]==='1').length;
+  const e=eng.filter((d,i)=>progress['e'+i]==='1').length;
+  document.getElementById('mathProg').textContent='高数完成 '+m+' / 7';
+  document.getElementById('engProg').textContent='英语完成 '+e+' / 7';
+}
+function renderMistakes(){
+  const box=document.getElementById('mkList'); box.innerHTML='';
+  if(!mistakes.length){ box.innerHTML='<div class="mk-empty">还没有错题，遇到错的随手记一条，复盘时最有用。</div>'; return; }
+  mistakes.slice().reverse().forEach((m,idx)=>{
+    const realIdx = mistakes.length-1-idx;
+    const el=document.createElement('div'); el.className='mk-item';
+    el.innerHTML='<div class="mk-top"><span class="mk-badge">'+m.subject+'</span><button class="sec sm" onclick="delMistake('+realIdx+')">删除</button></div>'+
+      '<div class="mk-wrong"><b>✗ 错</b>'+esc(m.wrong)+'</div>'+
+      '<div class="mk-right"><b>✓ 对</b>'+esc(m.right)+'</div>'+
+      (m.note?'<div class="mk-note">📝 '+esc(m.note)+'</div>':'')+
+      '<div class="mk-note">🕒 '+m.date+'</div>';
+    box.appendChild(el);
+  });
+}
+function esc(s){ return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function addMistake(){
+  const wrong=document.getElementById('mkWrong').value.trim();
+  const right=document.getElementById('mkRight').value.trim();
+  if(!wrong && !right){ alert('至少填一项'); return; }
+  mistakes.push({ date:new Date().toISOString().slice(0,10), subject:document.getElementById('mkSub').value, wrong, right, note:document.getElementById('mkNote').value.trim() });
+  saveLocal(); renderMistakes(); scheduleSync();
+  document.getElementById('mkWrong').value=''; document.getElementById('mkRight').value=''; document.getElementById('mkNote').value='';
+}
+function delMistake(i){ if(confirm('删除这条错题？')){ mistakes.splice(i,1); saveLocal(); renderMistakes(); scheduleSync(); } }
+function resetAll(){ if(confirm('确定清空所有勾选（错题保留）？')){ progress={}; saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); scheduleSync(); } }
+function exportData(){
+  const blob=new Blob([JSON.stringify({progress,mistakes})],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='study-data.json'; a.click();
+}
+function importData(ev){
+  const f=ev.target.files[0]; if(!f) return;
+  const r=new FileReader(); r.onload=()=>{
+    try{ const o=JSON.parse(r.result); if(o.progress){progress=o.progress;} if(o.mistakes){mistakes=o.mistakes;} saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); alert('数据已导入'); }catch(e){ alert('文件格式不对'); }
+  }; r.readAsText(f);
+}
+
+// ---- 云同步（统一 study-data.json） ----
+function setStatus(t, cls){ const s=document.getElementById('syncStatus'); s.textContent=t; s.className='syncstatus '+cls; }
+function collectData(){ return {progress, mistakes}; }
+function applyData(d){
+  if(d && d.progress){ progress=d.progress; }
+  if(d && Array.isArray(d.mistakes)){ mistakes=d.mistakes; }
+  saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes();
+}
+async function ghUser(){
+  const r=await fetch('https://api.github.com/user',{headers:{Authorization:'token '+ghToken}});
+  if(!r.ok) throw new Error('token无效或网络异常');
+  return (await r.json()).login;
+}
+async function ghGet(){
+  const r=await fetch(`https://api.github.com/repos/${ghRepo}/contents/study-data.json`,{headers:{Authorization:'token '+ghToken}});
+  if(r.status===404) return null;
+  if(!r.ok) throw new Error('读取失败 '+r.status);
+  const j=await r.json();
+  return { sha:j.sha, data:JSON.parse(decodeURIComponent(escape(atob(j.content)))) };
+}
+async function ghPut(obj){
+  const content=btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+  const body={ message:'sync study data', content };
+  if(ghSha) body.sha=ghSha;
+  const r=await fetch(`https://api.github.com/repos/${ghRepo}/contents/study-data.json`,{
+    method:'PUT',
+    headers:{Authorization:'token '+ghToken,'Content-Type':'application/json'},
+    body:JSON.stringify(body)
+  });
+  if(!r.ok) throw new Error('写入失败 '+r.status);
+  ghSha=(await r.json()).content.sha; localStorage.setItem('gh_sha',ghSha);
+}
+let syncTimer=null;
+function scheduleSync(){
+  if(!ghToken || !ghRepo) return;
+  clearTimeout(syncTimer);
+  syncTimer=setTimeout(doSync, 800);
+}
+async function doSync(){
+  try{ await ghPut(collectData()); setStatus('已同步 '+new Date().toLocaleTimeString(),'ok'); }
+  catch(e){ setStatus('同步失败：'+e.message+'（本机已保存）','bad'); }
+}
+async function connect(){
+  ghToken=document.getElementById('token').value.trim();
+  if(!ghToken){ alert('请先粘贴 Token'); return; }
+  try{
+    setStatus('连接中…','wait');
+    const login=await ghUser();
+    ghRepo=login+'/'+REPO_NAME;
+    localStorage.setItem('gh_token',ghToken); localStorage.setItem('gh_repo',ghRepo);
+    const f=await ghGet();
+    if(f){ ghSha=f.sha; localStorage.setItem('gh_sha',ghSha); applyData(f.data); }
+    else { await ghPut(collectData()); }
+    setStatus('已连接：'+ghRepo+'（打卡与错题自动同步）','ok');
+    document.getElementById('syncPanel').style.display='none';
+  }catch(e){ setStatus('连接失败：'+e.message,'bad'); }
+}
+function disconnect(){
+  localStorage.removeItem('gh_token'); localStorage.removeItem('gh_repo'); localStorage.removeItem('gh_sha');
+  ghToken=''; ghRepo=''; ghSha=''; setStatus('已清除 Token，打卡仅存本机。','wait');
+  document.getElementById('syncPanel').style.display='block';
+}
+(async function autoLoad(){
+  if(ghToken && ghRepo){
+    try{ const f=await ghGet(); if(f){ ghSha=f.sha; localStorage.setItem('gh_sha',ghSha); applyData(f.data);} setStatus('已连接：'+ghRepo,'ok'); }
+    catch(e){ setStatus('云端读取失败，使用本机数据。','bad'); }
+  }
+})();
+render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes();
+</script>
+</body>
+</html>
