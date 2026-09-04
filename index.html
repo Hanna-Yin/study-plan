@@ -48,6 +48,8 @@
   .mk-note { font-size:12px; color:#6b7280; margin-top:5px; }
   .mk-empty { font-size:13px; color:#9ca3af; }
   /* 学习回顾 */
+  .hist-block { margin-bottom:14px; }
+  .hist-block-title { font-size:15px; font-weight:700; color:#1d4ed8; margin:4px 0 10px; border-left:4px solid #2563eb; padding-left:8px; }
   .hist-day { border:1px solid #e5e7eb; border-radius:10px; padding:12px; margin-bottom:12px; }
   .hd-head { display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:15px; }
   .hg { font-size:11px; padding:2px 8px; border-radius:999px; font-weight:600; }
@@ -269,18 +271,19 @@ function update(){
   document.getElementById('engProg').textContent='英语完成 '+e+' / 7';
 }
 function renderHistory(){
-  const box=document.getElementById('hist'); box.innerHTML='';
+  const box=document.getElementById('hist');
+  let htmlM='<div class="hist-block"><div class="hist-block-title">📐 高数学习回顾（Day1 ~ Day7）</div>';
+  let htmlE='<div class="hist-block"><div class="hist-block-title">🔤 英语学习回顾（Day1 ~ Day7）</div>';
   days.forEach((d,i)=>{
     const md = progress['m'+i]==='1';
     const ed = progress['e'+i]==='1';
-    const card=document.createElement('div'); card.className='hist-day';
-    let html='<div class="hd-head"><b>'+d.id+'</b>'+
-      (md?'<span class="hg ok">高数✓</span>':'<span class="hg no">高数</span>')+
-      (ed?'<span class="hg ok">英语✓</span>':'<span class="hg no">英语</span>')+'</div>';
-    html+='<div class="hd-sec"><b>📐 '+esc(d.math.topic)+'</b><div class="hd-t">'+esc(d.math.summary)+'</div><div class="hd-key">💡 '+esc(d.math.key)+'</div>'+(d.math.note?'<div class="hd-note">📌 '+esc(d.math.note)+'</div>':'')+'</div>';
-    html+='<div class="hd-sec"><b>🔤 英语</b><div class="hd-t">'+esc(d.eng.summary)+'</div><div class="hd-key">💡 '+esc(d.eng.key)+'</div></div>';
-    card.innerHTML=html; box.appendChild(card);
+    htmlM+='<div class="hist-day"><div class="hd-head"><b>'+d.id+'</b>'+(md?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+'</div>'+
+      '<div class="hd-sec"><b>'+esc(d.math.topic)+'</b><div class="hd-t">'+esc(d.math.summary)+'</div><div class="hd-key">💡 '+esc(d.math.key)+'</div>'+(d.math.note?'<div class="hd-note">📌 '+esc(d.math.note)+'</div>':'')+'</div></div>';
+    htmlE+='<div class="hist-day"><div class="hd-head"><b>'+d.id+'</b>'+(ed?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+'</div>'+
+      '<div class="hd-sec"><b>'+esc(d.eng.summary.split('：')[0])+'</b><div class="hd-t">'+esc(d.eng.summary)+'</div><div class="hd-key">💡 '+esc(d.eng.key)+'</div></div></div>';
   });
+  htmlM+='</div>'; htmlE+='</div>';
+  box.innerHTML = htmlM + htmlE;
 }
 let exCounter=0;
 function renderExercises(){
