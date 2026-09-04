@@ -1,7 +1,26 @@
 {
-  "progress": { "m0": "1", "m1": "1", "e0": "1", "e1": "1" },
+  "progress": {
+    "m0": "1",
+    "m1": "1",
+    "e0": "1",
+    "e1": "1",
+    "m2": "1",
+    "e2": "1"
+  },
   "mistakes": [
-    { "date": "2026-09-04", "subject": "英语", "wrong": "she have a cat and a dog", "right": "she has a cat and a dog", "note": "she/he/it 是三单，have 要变成 has" },
-    { "date": "2026-09-04", "subject": "英语", "wrong": "They go to eat hamburger", "right": "They go to eat a hamburger / hamburgers", "note": "hamburger 可数名词，单数前加 a 或变复数" }
+    {
+      "date": "2026-09-04",
+      "subject": "英语",
+      "wrong": "she have a cat and a dog",
+      "right": "she has a cat and a dog",
+      "note": "she/he/it 是三单，have 要变成 has"
+    },
+    {
+      "date": "2026-09-04",
+      "subject": "英语",
+      "wrong": "They go to eat hamburger",
+      "right": "They go to eat a hamburger / hamburgers",
+      "note": "hamburger 可数名词，单数前加 a 或变复数"
+    }
   ]
 }
