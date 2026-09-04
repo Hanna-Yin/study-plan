@@ -47,6 +47,23 @@
   .mk-right { color:#059669; font-size:14px; margin-top:3px; }
   .mk-note { font-size:12px; color:#6b7280; margin-top:5px; }
   .mk-empty { font-size:13px; color:#9ca3af; }
+  /* 学习回顾 */
+  .hist-day { border:1px solid #e5e7eb; border-radius:10px; padding:12px; margin-bottom:12px; }
+  .hd-head { display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:15px; }
+  .hg { font-size:11px; padding:2px 8px; border-radius:999px; font-weight:600; }
+  .hg.ok { background:#dcfce7; color:#15803d; }
+  .hg.no { background:#f1f5f9; color:#94a3b8; }
+  .hd-sec { margin:8px 0; }
+  .hd-t { font-size:13px; color:#374151; margin:3px 0; }
+  .hd-key { font-size:13px; color:#1d4ed8; background:#eff6ff; border-radius:6px; padding:6px 10px; margin-top:4px; }
+  .hd-note { font-size:12px; color:#92400e; background:#fffbeb; border-radius:6px; padding:6px 10px; margin-top:6px; }
+  /* 每日练习 */
+  .ex-day { border:1px solid #dbeafe; border-radius:10px; padding:12px; margin-bottom:12px; background:#f8fbff; }
+  .ex-head { font-weight:700; font-size:15px; color:#1e40af; margin-bottom:8px; }
+  .ex-item { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:8px 0; border-bottom:1px dashed #dbeafe; }
+  .ex-item:last-child { border-bottom:none; }
+  .ex-q { flex:1; min-width:200px; font-size:14px; }
+  .ex-a { width:100%; font-size:14px; color:#059669; background:#ecfdf5; border-radius:6px; padding:6px 10px; }
 </style>
 </head>
 <body>
@@ -95,6 +112,18 @@
   <div id="mkList"></div>
 </div>
 
+<div class="card">
+  <h2>📖 学习回顾（随时回看已学内容）</h2>
+  <div class="tip">这里把每天「学了什么、重点是什么」记下来，没网络也能翻。✓ 表示你已打卡完成。</div>
+  <div id="hist"></div>
+</div>
+
+<div class="card">
+  <h2>✏️ 每日练习（手机也能自测）</h2>
+  <div class="tip">没有网络/不方便找专家时，就在这里自己做。点「显示答案」核对，做不出没关系——看懂答案也算学过。<b>高数只做出1道也过关。</b></div>
+  <div id="exbox"></div>
+</div>
+
 <div class="sync">💡 进度默认存在本机。已连云同步时，专家帮你打的卡、你记的错题，手机/电脑打开同一网址自动一致。导出/导入可离线备份。</div>
 
 <div class="btns">
@@ -106,8 +135,8 @@
 
 <script>
 const math = [
- ["Day1","函数的概念：什么是函数、定义域、求函数值（让AI用生活例子讲）"],
- ["Day2","初等函数：一次/二次/指数/对数/三角函数基础认识"],
+ ["Day1","函数的概念：什么是函数、定义域、求函数值"],
+ ["Day2","初等函数：一次/二次/指数函数（对数、三角后面单开）"],
  ["Day3","极限的直观理解：x→a 时 f(x) 趋近什么，配合画图"],
  ["Day4","极限的性质与四则运算"],
  ["Day5","重要极限①：(1+1/n)^n→e 的直观含义"],
@@ -123,6 +152,82 @@ const eng = [
  ["Day6","背15个基础词 + AI造1句（周末多复习前5天）"],
  ["Day7","复习本周约90个词 + 读1段极简英文"]
 ];
+
+// 每天详细内容：用于「学习回顾」与「每日练习」，全部离线可见
+const days = [
+ {
+  id:"Day1",
+  math:{ topic:"函数的概念",
+    summary:"函数就是「输入→输出」的规则。写法 y=f(x)：x 是输入，y 是输出，f 是规则。定义域是 x 能取的值；函数值是给定 x 算出的 y。",
+    key:"代入思想：f(x) 是个待填的空，x 给什么值就往里填什么。这是后面极限、导数、积分的地基。",
+    ex:[["f(x)=2x，求 f(3)","f(3)=2×3=6"],["f(x)=x+1，求 f(0)","f(0)=0+1=1"],["f(x)=x²，求 f(2)","f(2)=2²=4"]] },
+  eng:{ summary:"今日15词：a an the I you he she it is am are book read cat dog",
+    key:"先认识最基础的代词和 be 动词，能拼出 I read a book.（我读一本书）。",
+    ex:[["用今日词造1句（例：I read a book.）","I read a book. 我读一本书。"]] }
+ },
+ {
+  id:"Day2",
+  math:{ topic:"初等函数（一次 / 二次 / 指数）",
+    summary:"把几种最基础的函数认个脸熟。一次函数 y=kx+b（直线，如 y=2x+1）；二次函数 y=ax²+bx+c（抛物线，如 y=x²）；指数函数 y=aˣ（变量 x 在指数位置上，如 y=2ˣ）。",
+    key:"★ 指数函数易混点：是「x 在头顶（指数）」，不是「a 在头顶」。y=2ˣ 表示「2 的 x 次方」：x=1→2，x=2→4，x=3→8，越往后涨越快。对数函数 y=logₐ(x) 是指数的反操作，先混脸熟即可。",
+    note:"三角函数（sin 正弦 / cos 余弦 / tan 正切，关于「角度」的函数）数二会单独学，本日只混脸熟，不用急——下面有专门说明。",
+    ex:[["y=2x+1，求 x=0 时 y","y=2×0+1=1"],["y=x²，求 x=3 时 y","y=3²=9"],["y=2ˣ，求 x=2 时 y","y=2²=4"]] },
+  eng:{ summary:"今日15词：we 我们 · they 他们 · my 我的 · your 你的 · this 这个 · that 那个 · have 有 · has 有(三单) · do 做 · go 去 · eat 吃 · like 喜欢 · good 好的 · name 名字 · water 水",
+    key:"记牢：she/he/it 后用 has（三单加 s），we/you/they 后用 have（不加 s）。",
+    ex:[["用今日词造1句（含 has 或 have）","She has a cup of water. 她有一杯水。 / We have water. 我们有水。"]] }
+ },
+ {
+  id:"Day3",
+  math:{ topic:"极限的直观理解",
+    summary:"极限就是「当 x 无限接近某个值 a 时，f(x) 越来越靠近哪个数」。注意不要求 x 等于 a，只要求逼近。连续函数极限≈把 x 直接代入的值。",
+    key:"今天还在用「代入」老本事：连续函数直接代。x→a 时，把 a 代入即可。",
+    ex:[["f(x)=x+2，x→1 时极限是多少","x→1 时 f(x)→3（即 1+2）"],["f(x)=2x，x→3 时极限是多少","→6（即 2×3）"],["f(x)=1/x，当 x 越来越大(→∞)，f(x) 趋近","0（分母越大，分数越小越接近0）"]] },
+  eng:{ summary:"今日15词：no 不 · not 不 · yes 是 · what 什么 · who 谁 · where 哪里 · when 何时 · why 为什么 · how 怎样 · big 大 · small 小 · red 红 · blue 蓝 · one 一 · two 二",
+    key:"这批加了疑问词+颜色+数字，马上能造句：What is your name? / I have two books.",
+    ex:[["用今日词造1句（含疑问词或数字）","What is your name? 你叫什么名字？ / I have two books. 我有两本书。"]] }
+ },
+ {
+  id:"Day4",
+  math:{ topic:"极限的性质与四则运算",
+    summary:"极限能加减乘除：lim(f±g)=limf±limg；lim(f·g)=limf·limg；(limf)/(limg)（要求 limg≠0）。前提是各自极限存在。",
+    key:"先分别求出每个部分的极限，再像普通数一样算。",
+    ex:[["lim(x→2)(x+3)","2+3=5"],["lim(x→1)(2x)","2×1=2"],["lim(x→0)(x²+1)","0+1=1"]] },
+  eng:{ summary:"今日15词：time 时间 · day 天 · today 今天 · now 现在 · work 工作 · study 学习 · school 学校 · home 家 · friend 朋友 · happy 开心 · tired 累 · help 帮助 · want 想要 · need 需要 · can 能",
+    key:"都是超高频词，课文里天天见：I want to study. / I am tired.",
+    ex:[["用今日词造1句","I want to study at school. 我想在学校学习。"]] }
+ },
+ {
+  id:"Day5",
+  math:{ topic:"重要极限①：(1+1/n)^n→e",
+    summary:"当 n 越来越大，(1+1/n)^n 无限接近一个固定数 e≈2.71828…。e 是和 π 一样重要的常数。",
+    key:"先记住结论即可，不必推导。见到 (1+1/n)^n 就想 e。",
+    ex:[["n=1 时 (1+1/1)^1 是多少","2"],["n=10 时 (1+1/10)^10（认识即可）","≈2.59"],["n→∞ 时 (1+1/n)^n 趋于","e ≈ 2.718"]] },
+  eng:{ summary:"今日15词：language 语言 · word 单词 · sentence 句子 · speak 说 · listen 听 · write 写 · learn 学习 · teacher 老师 · student 学生 · class 课 · question 问题 · answer 回答 · remember 记住 · understand 理解 · practice 练习",
+    key:"围绕「学习」主题：I practice every day. / I don't understand.",
+    ex:[["用今日词造1句","I practice every day. 我每天练习。 / I don't understand. 我不懂。"]] }
+ },
+ {
+  id:"Day6",
+  math:{ topic:"简单极限计算（代入法、约分消零因子）",
+    summary:"连续函数直接代入；代入若出现 0/0，先因式分解约分，再代入。",
+    key:"看到 0/0 别慌——先约分再代。",
+    ex:[["lim(x→2)(x+1)","2+1=3"],["lim(x→0)(x²+2x)/x","=lim(x→0)(x+2)=2（分子提 x 约掉）"],["lim(x→3)(x²-9)/(x-3)","=lim(x→3)(x+3)=6（x²-9=(x-3)(x+3)）"]] },
+  eng:{ summary:"复习前5天词 + 新15词：morning 早晨 · evening 晚上 · week 周 · month 月 · year 年 · number 数字 · color 颜色 · food 食物 · drink 喝 · meat 肉 · rice 米饭 · vegetable 蔬菜 · fruit 水果 · money 钱 · buy 买",
+    key:"今天以「复习」为主，新词围绕生活：I buy food and drink. / What color is it?",
+    ex:[["用今日词造1句","I buy rice and vegetables. 我买米饭和蔬菜。"]] }
+ },
+ {
+  id:"Day7",
+  math:{ topic:"复盘日",
+    summary:"重做本周错题，把仍不懂的整理给 AI。回头看 Day1–Day6 的笔记和练习，哪里还卡就问。",
+    key:"复盘比赶进度重要。这一天的目标不是学新东西，是把前面的地基夯牢。",
+    ex:[] },
+  eng:{ summary:"复习本周约90个词 + 读1段极简英文",
+    key:"把前面6天的词过一遍，能认、能读句就达标。",
+    ex:[] }
+ }
+];
+
 const REPO_NAME = 'study-plan';
 let progress = {};
 let mistakes = [];
@@ -150,7 +255,7 @@ function render(id, data, key){
     const row=document.createElement('div'); row.className='row';
     const cb=document.createElement('input'); cb.type='checkbox'; cb.id=key+i;
     cb.checked=progress[key+i]==='1';
-    cb.onchange=()=>{ progress[key+i]=cb.checked?'1':'0'; cb.checked?row.classList.add('done'):row.classList.remove('done'); update(); saveLocal(); scheduleSync(); };
+    cb.onchange=()=>{ progress[key+i]=cb.checked?'1':'0'; cb.checked?row.classList.add('done'):row.classList.remove('done'); update(); saveLocal(); scheduleSync(); renderHistory(); };
     if(cb.checked) row.classList.add('done');
     const lab=document.createElement('label'); lab.htmlFor=key+i;
     lab.innerHTML='<span class="day">'+d[0]+'</span>'+d[1];
@@ -163,6 +268,36 @@ function update(){
   document.getElementById('mathProg').textContent='高数完成 '+m+' / 7';
   document.getElementById('engProg').textContent='英语完成 '+e+' / 7';
 }
+function renderHistory(){
+  const box=document.getElementById('hist'); box.innerHTML='';
+  days.forEach((d,i)=>{
+    const md = progress['m'+i]==='1';
+    const ed = progress['e'+i]==='1';
+    const card=document.createElement('div'); card.className='hist-day';
+    let html='<div class="hd-head"><b>'+d.id+'</b>'+
+      (md?'<span class="hg ok">高数✓</span>':'<span class="hg no">高数</span>')+
+      (ed?'<span class="hg ok">英语✓</span>':'<span class="hg no">英语</span>')+'</div>';
+    html+='<div class="hd-sec"><b>📐 '+esc(d.math.topic)+'</b><div class="hd-t">'+esc(d.math.summary)+'</div><div class="hd-key">💡 '+esc(d.math.key)+'</div>'+(d.math.note?'<div class="hd-note">📌 '+esc(d.math.note)+'</div>':'')+'</div>';
+    html+='<div class="hd-sec"><b>🔤 英语</b><div class="hd-t">'+esc(d.eng.summary)+'</div><div class="hd-key">💡 '+esc(d.eng.key)+'</div></div>';
+    card.innerHTML=html; box.appendChild(card);
+  });
+}
+let exCounter=0;
+function renderExercises(){
+  const box=document.getElementById('exbox'); box.innerHTML='';
+  days.forEach(d=>{
+    if((!d.math.ex || !d.math.ex.length) && (!d.eng.ex || !d.eng.ex.length)) return;
+    const card=document.createElement('div'); card.className='ex-day';
+    let html='<div class="ex-head">'+d.id+'</div>';
+    const all=[].concat((d.math.ex||[]).map(q=>['📐',q]), (d.eng.ex||[]).map(q=>['🔤',q]));
+    all.forEach(q=>{
+      const qid='exa'+(exCounter++);
+      html+='<div class="ex-item"><div class="ex-q">'+q[0]+' '+esc(q[1][0])+'</div><button class="sec sm" onclick="toggleAns(\''+qid+'\')">显示答案</button><div class="ex-a" id="'+qid+'" style="display:none">'+esc(q[1][1])+'</div></div>';
+    });
+    card.innerHTML=html; box.appendChild(card);
+  });
+}
+function toggleAns(id){ const el=document.getElementById(id); el.style.display = el.style.display==='none' ? 'block':'none'; }
 function renderMistakes(){
   const box=document.getElementById('mkList'); box.innerHTML='';
   if(!mistakes.length){ box.innerHTML='<div class="mk-empty">还没有错题，遇到错的随手记一条，复盘时最有用。</div>'; return; }
@@ -187,7 +322,7 @@ function addMistake(){
   document.getElementById('mkWrong').value=''; document.getElementById('mkRight').value=''; document.getElementById('mkNote').value='';
 }
 function delMistake(i){ if(confirm('删除这条错题？')){ mistakes.splice(i,1); saveLocal(); renderMistakes(); scheduleSync(); } }
-function resetAll(){ if(confirm('确定清空所有勾选（错题保留）？')){ progress={}; saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); scheduleSync(); } }
+function resetAll(){ if(confirm('确定清空所有勾选（错题保留）？')){ progress={}; saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderHistory(); scheduleSync(); } }
 function exportData(){
   const blob=new Blob([JSON.stringify({progress,mistakes})],{type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='study-data.json'; a.click();
@@ -195,7 +330,7 @@ function exportData(){
 function importData(ev){
   const f=ev.target.files[0]; if(!f) return;
   const r=new FileReader(); r.onload=()=>{
-    try{ const o=JSON.parse(r.result); if(o.progress){progress=o.progress;} if(o.mistakes){mistakes=o.mistakes;} saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); alert('数据已导入'); }catch(e){ alert('文件格式不对'); }
+    try{ const o=JSON.parse(r.result); if(o.progress){progress=o.progress;} if(o.mistakes){mistakes=o.mistakes;} saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); alert('数据已导入'); }catch(e){ alert('文件格式不对'); }
   }; r.readAsText(f);
 }
 
@@ -205,7 +340,7 @@ function collectData(){ return {progress, mistakes}; }
 function applyData(d){
   if(d && d.progress){ progress=d.progress; }
   if(d && Array.isArray(d.mistakes)){ mistakes=d.mistakes; }
-  saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes();
+  saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises();
 }
 async function ghUser(){
   const r=await fetch('https://api.github.com/user',{headers:{Authorization:'token '+ghToken}});
@@ -267,7 +402,7 @@ function disconnect(){
     catch(e){ setStatus('云端读取失败，使用本机数据。','bad'); }
   }
 })();
-render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes();
+render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises();
 </script>
 </body>
 </html>
