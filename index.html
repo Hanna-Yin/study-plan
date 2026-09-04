@@ -50,6 +50,18 @@
   /* 单词库 */
   .wd-ex { font-size:14px; color:#1f2937; margin-top:3px; }
   .wd-ex b { font-size:11px; margin-right:4px; color:#6b7280; font-weight:600; }
+  /* 单词库：搜索 + 按天折叠 */
+  .wd-search { width:100%; box-sizing:border-box; padding:9px 12px; margin-bottom:10px; border:1px solid #e5e7eb; border-radius:10px; font-size:14px; }
+  .wd-group { border:1px solid #e5e7eb; border-radius:10px; margin-bottom:8px; overflow:hidden; }
+  .wd-group-head { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:#f8fafc; cursor:pointer; font-size:14px; font-weight:700; color:#1d4ed8; }
+  .wd-group-head .wd-count { font-size:12px; color:#6b7280; font-weight:500; }
+  .wd-group-body { display:none; padding:6px 10px 10px; }
+  .wd-group.open .wd-group-body { display:block; }
+  .wd-row { border-top:1px dashed #eef2f7; padding:8px 2px 6px; }
+  .wd-row:first-child { border-top:none; }
+  .wd-line { display:flex; align-items:baseline; gap:8px; }
+  .wd-w { font-weight:700; color:#111827; font-size:15px; }
+  .wd-m { color:#6b7280; font-size:13px; }
   /* 学习回顾 */
   .hist-block { margin-bottom:14px; }
   .hist-block-title { font-size:15px; font-weight:700; color:#1d4ed8; margin:4px 0 10px; border-left:4px solid #2563eb; padding-left:8px; }
@@ -127,11 +139,17 @@
     <button class="tab-btn" onclick="switchLib('mistakes')">📒 错题库</button>
   </div>
   <div id="libWords" class="tab-panel active">
+    <input id="wdSearch" class="wd-search" placeholder="🔍 搜单词 / 中文意思（如 happy / 开心）" oninput="renderWords()">
     <div class="mk-form">
       <input id="wdWord" placeholder="单词（英文，如 happy）">
       <input id="wdMean" placeholder="中文意思（如 开心的）">
       <input id="wdEx" placeholder="例句（英文，如 I am happy.）">
       <input id="wdExCn" placeholder="例句中文（如 我很开心。）">
+      <select id="wdDay">
+        <option value="">（不分组）</option>
+        <option>Day1</option><option>Day2</option><option>Day3</option>
+        <option>Day4</option><option>Day5</option><option>Day6</option><option>Day7</option>
+      </select>
       <button onclick="addWord()">添加这个单词</button>
     </div>
     <div id="wdList"></div>
@@ -387,25 +405,50 @@ function addWord(){
   const mean=document.getElementById('wdMean').value.trim();
   const ex=document.getElementById('wdEx').value.trim();
   const excn=document.getElementById('wdExCn').value.trim();
+  const day=document.getElementById('wdDay').value.trim();
   if(!word){ alert('至少填写单词'); return; }
-  words.push({ date:new Date().toISOString().slice(0,10), word, mean, ex, excn });
+  words.push({ date:new Date().toISOString().slice(0,10), day, word, mean, ex, excn });
   saveLocal(); renderWords(); scheduleSync();
-  document.getElementById('wdWord').value=''; document.getElementById('wdMean').value=''; document.getElementById('wdEx').value=''; document.getElementById('wdExCn').value='';
+  document.getElementById('wdWord').value=''; document.getElementById('wdMean').value=''; document.getElementById('wdEx').value=''; document.getElementById('wdExCn').value=''; document.getElementById('wdDay').value='';
 }
 function delWord(i){ if(confirm('删除这个单词？')){ words.splice(i,1); saveLocal(); renderWords(); scheduleSync(); } }
 function renderWords(){
   const box=document.getElementById('wdList'); box.innerHTML='';
   if(!words.length){ box.innerHTML='<div class="mk-empty">还没有单词。学到新词就随手加进来（带中文意思和例句），复习时最有用。</div>'; return; }
-  words.slice().reverse().forEach((w,idx)=>{
-    const realIdx=words.length-1-idx;
-    const el=document.createElement('div'); el.className='mk-item';
-    el.innerHTML='<div class="mk-top"><span class="mk-badge">📕 '+esc(w.word)+'</span><button class="sec sm" onclick="delWord('+realIdx+')">删除</button></div>'+
-      (w.mean?'<div class="mk-right">'+esc(w.mean)+'</div>':'')+
-      (w.ex?'<div class="wd-ex"><b>例句</b>'+esc(w.ex)+'</div>':'')+
-      (w.excn?'<div class="mk-note">'+esc(w.excn)+'</div>':'')+
-      '<div class="mk-note">🕒 '+w.date+'</div>';
-    box.appendChild(el);
+  const q=(document.getElementById('wdSearch').value||'').trim().toLowerCase();
+  // 按天分组
+  const groups={}; const order=[];
+  words.forEach(w=>{
+    const key=w.day||'未分类';
+    if(!groups[key]){ groups[key]=[]; order.push(key); }
+    groups[key].push(w);
   });
+  order.sort((a,b)=>{
+    const na=a==='未分类'?999:parseInt((a.match(/\d+/)||[500])[0]);
+    const nb=b==='未分类'?999:parseInt((b.match(/\d+/)||[500])[0]);
+    return na-nb;
+  });
+  let shown=0;
+  order.forEach(day=>{
+    const filtered=groups[day].filter(w=> !q || (w.word||'').toLowerCase().includes(q) || (w.mean||'').toLowerCase().includes(q));
+    if(!filtered.length) return;
+    shown+=filtered.length;
+    const sec=document.createElement('div'); sec.className='wd-group';
+    const head=document.createElement('div'); head.className='wd-group-head';
+    head.innerHTML='<span>📅 '+esc(day)+'</span><span class="wd-count">'+filtered.length+' 个词</span>';
+    head.onclick=()=>sec.classList.toggle('open');
+    const body=document.createElement('div'); body.className='wd-group-body';
+    filtered.forEach(w=>{
+      const realIdx=words.indexOf(w);
+      const row=document.createElement('div'); row.className='wd-row';
+      row.innerHTML='<div class="wd-line"><span class="wd-w">'+esc(w.word)+'</span><span class="wd-m">'+esc(w.mean||'')+'</span></div>'+
+        (w.ex?'<div class="wd-ex"><b>例句</b>'+esc(w.ex)+(w.excn?('　'+esc(w.excn)):'')+'</div>':'')+
+        '<button class="sec sm" onclick="delWord('+realIdx+')">删除</button>';
+      body.appendChild(row);
+    });
+    sec.appendChild(head); sec.appendChild(body); box.appendChild(sec);
+  });
+  if(!shown){ box.innerHTML='<div class="mk-empty">没有匹配的单词。</div>'; }
 }
 function resetAll(){ if(confirm('确定清空所有勾选（错题保留）？')){ progress={}; saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderHistory(); scheduleSync(); } }
 function exportData(){
