@@ -59,6 +59,12 @@
   .hd-t { font-size:13px; color:#374151; margin:3px 0; }
   .hd-key { font-size:13px; color:#1d4ed8; background:#eff6ff; border-radius:6px; padding:6px 10px; margin-top:4px; }
   .hd-note { font-size:12px; color:#92400e; background:#fffbeb; border-radius:6px; padding:6px 10px; margin-top:6px; }
+  /* 学习回顾 Tab 切换 */
+  .tabs { display:flex; gap:8px; margin-bottom:12px; }
+  .tab-btn { flex:1; background:#e5e7eb; color:#374151; border:none; padding:11px 10px; border-radius:10px; cursor:pointer; font-size:14px; font-weight:600; }
+  .tab-btn.active { background:#2563eb; color:#fff; }
+  .tab-panel { display:none; }
+  .tab-panel.active { display:block; }
   /* 每日练习 */
   .ex-day { border:1px solid #dbeafe; border-radius:10px; padding:12px; margin-bottom:12px; background:#f8fbff; }
   .ex-head { font-weight:700; font-size:15px; color:#1e40af; margin-bottom:8px; }
@@ -116,8 +122,13 @@
 
 <div class="card">
   <h2>📖 学习回顾（随时回看已学内容）</h2>
-  <div class="tip">这里把每天「学了什么、重点是什么」记下来，没网络也能翻。✓ 表示你已打卡完成。</div>
-  <div id="hist"></div>
+  <div class="tip">这里把每天「学了什么、重点是什么」记下来，没网络也能翻。✓ 表示你已打卡完成。点下方标签切换「高数 / 英语」，页面更短更好找。</div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchHist('math')">📐 高数回顾</button>
+    <button class="tab-btn" onclick="switchHist('eng')">🔤 英语回顾</button>
+  </div>
+  <div id="histMath" class="tab-panel active"></div>
+  <div id="histEng" class="tab-panel"></div>
 </div>
 
 <div class="card">
@@ -270,20 +281,25 @@ function update(){
   document.getElementById('mathProg').textContent='高数完成 '+m+' / 7';
   document.getElementById('engProg').textContent='英语完成 '+e+' / 7';
 }
+function switchHist(t){
+  document.getElementById('histMath').classList.toggle('active', t==='math');
+  document.getElementById('histEng').classList.toggle('active', t==='eng');
+  const btns=document.querySelectorAll('.tab-btn');
+  btns[0].classList.toggle('active', t==='math');
+  btns[1].classList.toggle('active', t==='eng');
+}
 function renderHistory(){
-  const box=document.getElementById('hist');
-  let htmlM='<div class="hist-block"><div class="hist-block-title">📐 高数学习回顾（Day1 ~ Day7）</div>';
-  let htmlE='<div class="hist-block"><div class="hist-block-title">🔤 英语学习回顾（Day1 ~ Day7）</div>';
+  const boxM=document.getElementById('histMath');
+  const boxE=document.getElementById('histEng');
+  boxM.innerHTML=''; boxE.innerHTML='';
   days.forEach((d,i)=>{
     const md = progress['m'+i]==='1';
     const ed = progress['e'+i]==='1';
-    htmlM+='<div class="hist-day"><div class="hd-head"><b>'+d.id+'</b>'+(md?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+'</div>'+
-      '<div class="hd-sec"><b>'+esc(d.math.topic)+'</b><div class="hd-t">'+esc(d.math.summary)+'</div><div class="hd-key">💡 '+esc(d.math.key)+'</div>'+(d.math.note?'<div class="hd-note">📌 '+esc(d.math.note)+'</div>':'')+'</div></div>';
-    htmlE+='<div class="hist-day"><div class="hd-head"><b>'+d.id+'</b>'+(ed?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+'</div>'+
-      '<div class="hd-sec"><b>'+esc(d.eng.summary.split('：')[0])+'</b><div class="hd-t">'+esc(d.eng.summary)+'</div><div class="hd-key">💡 '+esc(d.eng.key)+'</div></div></div>';
+    boxM.innerHTML += '<div class="hist-day"><div class="hd-head"><b>'+d.id+'</b>'+(md?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+'</div>'+
+      '<div class="hd-sec"><b>'+esc(d.math.topic)+'</b><div class="hd-t">'+esc(d.math.summary)+'</div><div class="hd-key">💡 重点：'+esc(d.math.key)+'</div>'+(d.math.note?'<div class="hd-note">📌 易错点：'+esc(d.math.note)+'</div>':'')+'</div></div>';
+    boxE.innerHTML += '<div class="hist-day"><div class="hd-head"><b>'+d.id+'</b>'+(ed?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+'</div>'+
+      '<div class="hd-sec"><b>'+esc(d.eng.summary.split('：')[0])+'</b><div class="hd-t">'+esc(d.eng.summary)+'</div><div class="hd-key">💡 重点：'+esc(d.eng.key)+'</div></div></div>';
   });
-  htmlM+='</div>'; htmlE+='</div>';
-  box.innerHTML = htmlM + htmlE;
 }
 let exCounter=0;
 function renderExercises(){
