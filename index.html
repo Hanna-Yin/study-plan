@@ -50,13 +50,17 @@
   /* 单词库 */
   .wd-ex { font-size:14px; color:#1f2937; margin-top:3px; }
   .wd-ex b { font-size:11px; margin-right:4px; color:#6b7280; font-weight:600; }
-  /* 单词库：搜索 + 按天折叠 */
+  /* 单词库：搜索 + 日历式 */
   .wd-search { width:100%; box-sizing:border-box; padding:9px 12px; margin-bottom:10px; border:1px solid #e5e7eb; border-radius:10px; font-size:14px; }
-  .wd-group { border:1px solid #e5e7eb; border-radius:10px; margin-bottom:8px; overflow:hidden; }
-  .wd-group-head { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; background:#f8fafc; cursor:pointer; font-size:14px; font-weight:700; color:#1d4ed8; }
-  .wd-group-head .wd-count { font-size:12px; color:#6b7280; font-weight:500; }
-  .wd-group-body { display:none; padding:6px 10px 10px; }
-  .wd-group.open .wd-group-body { display:block; }
+  .wd-cal { display:grid; grid-template-columns:repeat(7,1fr); gap:7px; margin-bottom:12px; }
+  .wd-cell { border:1px solid #e5e7eb; border-radius:10px; padding:9px 2px; text-align:center; cursor:pointer; background:#fff; transition:.15s; }
+  .wd-cell:active { transform:scale(.96); }
+  .wd-cell.active { border-color:#2563eb; background:#eff6ff; }
+  .wd-cell .d { font-size:12px; font-weight:800; color:#374151; }
+  .wd-cell.active .d { color:#2563eb; }
+  .wd-cell .c { font-size:10px; color:#9ca3af; margin-top:3px; }
+  .wd-cell.has .c { color:#2563eb; font-weight:600; }
+  .wd-cal-title { font-size:13px; font-weight:700; color:#1d4ed8; margin:2px 0 8px; }
   .wd-row { border-top:1px dashed #eef2f7; padding:8px 2px 6px; }
   .wd-row:first-child { border-top:none; }
   .wd-line { display:flex; align-items:baseline; gap:8px; }
@@ -133,25 +137,14 @@
 
 <div class="card" id="libCard">
   <h2>📚 我的词库 & 错题（自动同步）</h2>
-  <div class="tip">点下方标签切换查看。📕 单词库记录你学过的词（含中文意思+例句）；📒 错题库记易错点。每次记录都会自动同步到每台设备。</div>
+  <div class="tip">点下方标签切换查看。📕 单词库由专家每天帮你整理（含中文意思+例句），<b>你不用自己添加</b>；点下方日历的某一天，就只看那天的词。📒 错题库记易错点，可随手记。两者都会自动同步到每台设备。</div>
   <div class="tabs">
     <button class="tab-btn active" onclick="switchLib('words')">📕 单词库</button>
     <button class="tab-btn" onclick="switchLib('mistakes')">📒 错题库</button>
   </div>
   <div id="libWords" class="tab-panel active">
     <input id="wdSearch" class="wd-search" placeholder="🔍 搜单词 / 中文意思（如 happy / 开心）" oninput="renderWords()">
-    <div class="mk-form">
-      <input id="wdWord" placeholder="单词（英文，如 happy）">
-      <input id="wdMean" placeholder="中文意思（如 开心的）">
-      <input id="wdEx" placeholder="例句（英文，如 I am happy.）">
-      <input id="wdExCn" placeholder="例句中文（如 我很开心。）">
-      <select id="wdDay">
-        <option value="">（不分组）</option>
-        <option>Day1</option><option>Day2</option><option>Day3</option>
-        <option>Day4</option><option>Day5</option><option>Day6</option><option>Day7</option>
-      </select>
-      <button onclick="addWord()">添加这个单词</button>
-    </div>
+    <div class="wd-cal" id="wdCal"></div>
     <div id="wdList"></div>
   </div>
   <div id="libMistakes" class="tab-panel">
@@ -400,55 +393,47 @@ function addMistake(){
   document.getElementById('mkWrong').value=''; document.getElementById('mkRight').value=''; document.getElementById('mkNote').value='';
 }
 function delMistake(i){ if(confirm('删除这条错题？')){ mistakes.splice(i,1); saveLocal(); renderMistakes(); scheduleSync(); } }
-function addWord(){
-  const word=document.getElementById('wdWord').value.trim();
-  const mean=document.getElementById('wdMean').value.trim();
-  const ex=document.getElementById('wdEx').value.trim();
-  const excn=document.getElementById('wdExCn').value.trim();
-  const day=document.getElementById('wdDay').value.trim();
-  if(!word){ alert('至少填写单词'); return; }
-  words.push({ date:new Date().toISOString().slice(0,10), day, word, mean, ex, excn });
-  saveLocal(); renderWords(); scheduleSync();
-  document.getElementById('wdWord').value=''; document.getElementById('wdMean').value=''; document.getElementById('wdEx').value=''; document.getElementById('wdExCn').value=''; document.getElementById('wdDay').value='';
+let wdSelectedDay='Day1';
+function wdRow(w){
+  const realIdx=words.indexOf(w);
+  const row=document.createElement('div'); row.className='wd-row';
+  row.innerHTML='<div class="wd-line"><span class="wd-w">'+esc(w.word)+'</span><span class="wd-m">'+esc(w.mean||'')+'</span></div>'+
+    (w.ex?'<div class="wd-ex"><b>例句</b>'+esc(w.ex)+(w.excn?('　'+esc(w.excn)):'')+'</div>':'')+
+    '<button class="sec sm" onclick="delWord('+realIdx+')">删除</button>';
+  return row;
 }
 function delWord(i){ if(confirm('删除这个单词？')){ words.splice(i,1); saveLocal(); renderWords(); scheduleSync(); } }
 function renderWords(){
-  const box=document.getElementById('wdList'); box.innerHTML='';
-  if(!words.length){ box.innerHTML='<div class="mk-empty">还没有单词。学到新词就随手加进来（带中文意思和例句），复习时最有用。</div>'; return; }
+  const cal=document.getElementById('wdCal'); if(!cal) return;
   const q=(document.getElementById('wdSearch').value||'').trim().toLowerCase();
-  // 按天分组
-  const groups={}; const order=[];
-  words.forEach(w=>{
-    const key=w.day||'未分类';
-    if(!groups[key]){ groups[key]=[]; order.push(key); }
-    groups[key].push(w);
+  // 统计每天词数
+  const counts={};
+  words.forEach(w=>{ const k=w.day||'未分类'; counts[k]=(counts[k]||0)+1; });
+  // 若选中的天没词，自动跳到第一个有词的天
+  if(!counts[wdSelectedDay]){ const first=days.find(d=>counts[d.id]); wdSelectedDay=first?first.id:'Day1'; }
+  // 渲染日历格子
+  cal.innerHTML='';
+  days.forEach(d=>{
+    const cnt=counts[d.id]||0;
+    const cell=document.createElement('div');
+    cell.className='wd-cell'+(wdSelectedDay===d.id?' active':'')+(cnt?' has':'');
+    cell.innerHTML='<div class="d">'+d.id.replace('Day','D')+'</div><div class="c">'+(cnt?cnt+'词':'—')+'</div>';
+    cell.onclick=()=>{ document.getElementById('wdSearch').value=''; wdSelectedDay=d.id; renderWords(); };
+    cal.appendChild(cell);
   });
-  order.sort((a,b)=>{
-    const na=a==='未分类'?999:parseInt((a.match(/\d+/)||[500])[0]);
-    const nb=b==='未分类'?999:parseInt((b.match(/\d+/)||[500])[0]);
-    return na-nb;
-  });
-  let shown=0;
-  order.forEach(day=>{
-    const filtered=groups[day].filter(w=> !q || (w.word||'').toLowerCase().includes(q) || (w.mean||'').toLowerCase().includes(q));
-    if(!filtered.length) return;
-    shown+=filtered.length;
-    const sec=document.createElement('div'); sec.className='wd-group';
-    const head=document.createElement('div'); head.className='wd-group-head';
-    head.innerHTML='<span>📅 '+esc(day)+'</span><span class="wd-count">'+filtered.length+' 个词</span>';
-    head.onclick=()=>sec.classList.toggle('open');
-    const body=document.createElement('div'); body.className='wd-group-body';
-    filtered.forEach(w=>{
-      const realIdx=words.indexOf(w);
-      const row=document.createElement('div'); row.className='wd-row';
-      row.innerHTML='<div class="wd-line"><span class="wd-w">'+esc(w.word)+'</span><span class="wd-m">'+esc(w.mean||'')+'</span></div>'+
-        (w.ex?'<div class="wd-ex"><b>例句</b>'+esc(w.ex)+(w.excn?('　'+esc(w.excn)):'')+'</div>':'')+
-        '<button class="sec sm" onclick="delWord('+realIdx+')">删除</button>';
-      body.appendChild(row);
-    });
-    sec.appendChild(head); sec.appendChild(body); box.appendChild(sec);
-  });
-  if(!shown){ box.innerHTML='<div class="mk-empty">没有匹配的单词。</div>'; }
+  const box=document.getElementById('wdList'); box.innerHTML='';
+  if(!words.length){ box.innerHTML='<div class="mk-empty">还没有单词。每天学完，专家会帮你把当天的词整理进来（含中文意思+例句），不用自己添加。</div>'; return; }
+  if(q){
+    const matched=words.filter(w=> !q || (w.word||'').toLowerCase().includes(q) || (w.mean||'').toLowerCase().includes(q));
+    if(!matched.length){ box.innerHTML='<div class="mk-empty">没有匹配的单词。</div>'; return; }
+    box.innerHTML='<div class="wd-cal-title">🔍 搜「'+esc(q)+'」共 '+matched.length+' 个</div>';
+    matched.forEach(w=>box.appendChild(wdRow(w)));
+    return;
+  }
+  const list=words.filter(w=>(w.day||'未分类')===wdSelectedDay);
+  if(!list.length){ box.innerHTML='<div class="mk-empty">'+wdSelectedDay+' 还没有单词，学完当天后专家会帮你整理进来。</div>'; return; }
+  box.innerHTML='<div class="wd-cal-title">📅 '+wdSelectedDay+' · 共 '+list.length+' 个词</div>';
+  list.forEach(w=>box.appendChild(wdRow(w)));
 }
 function resetAll(){ if(confirm('确定清空所有勾选（错题保留）？')){ progress={}; saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderHistory(); scheduleSync(); } }
 function exportData(){
