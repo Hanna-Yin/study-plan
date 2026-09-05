@@ -8,7 +8,8 @@
     "e2": "1",
     "m3": "1",
     "e3": "1",
-    "m4": "1"
+    "m4": "1",
+    "e4": "1"
   },
   "words": [
     {
@@ -430,6 +431,111 @@
       "mean": "能/可以",
       "ex": "I can go.",
       "excn": "我能去。"
+    },
+    {
+      "day": "Day5",
+      "word": "language",
+      "mean": "语言",
+      "ex": "English is a language.",
+      "excn": "英语是一门语言。"
+    },
+    {
+      "day": "Day5",
+      "word": "word",
+      "mean": "单词",
+      "ex": "This word is new.",
+      "excn": "这个单词是新的。"
+    },
+    {
+      "day": "Day5",
+      "word": "sentence",
+      "mean": "句子",
+      "ex": "This is a sentence.",
+      "excn": "这是一个句子。"
+    },
+    {
+      "day": "Day5",
+      "word": "speak",
+      "mean": "说（讲某种语言）",
+      "ex": "I speak English.",
+      "excn": "我说英语。"
+    },
+    {
+      "day": "Day5",
+      "word": "listen",
+      "mean": "听",
+      "ex": "I listen to the teacher.",
+      "excn": "我听老师讲。"
+    },
+    {
+      "day": "Day5",
+      "word": "write",
+      "mean": "写",
+      "ex": "I write a sentence.",
+      "excn": "我写一个句子。"
+    },
+    {
+      "day": "Day5",
+      "word": "learn",
+      "mean": "学习",
+      "ex": "I learn English.",
+      "excn": "我学英语。"
+    },
+    {
+      "day": "Day5",
+      "word": "teacher",
+      "mean": "老师",
+      "ex": "She is my teacher.",
+      "excn": "她是我的老师。"
+    },
+    {
+      "day": "Day5",
+      "word": "student",
+      "mean": "学生",
+      "ex": "I am a student.",
+      "excn": "我是学生。"
+    },
+    {
+      "day": "Day5",
+      "word": "class",
+      "mean": "课；班级",
+      "ex": "I have a class.",
+      "excn": "我有一节课。"
+    },
+    {
+      "day": "Day5",
+      "word": "question",
+      "mean": "问题",
+      "ex": "I have a question.",
+      "excn": "我有一个问题。"
+    },
+    {
+      "day": "Day5",
+      "word": "answer",
+      "mean": "回答",
+      "ex": "Please answer my question.",
+      "excn": "请回答我的问题。"
+    },
+    {
+      "day": "Day5",
+      "word": "remember",
+      "mean": "记住",
+      "ex": "I remember your name.",
+      "excn": "我记得你的名字。"
+    },
+    {
+      "day": "Day5",
+      "word": "understand",
+      "mean": "理解；懂",
+      "ex": "I don't understand.",
+      "excn": "我不懂。"
+    },
+    {
+      "day": "Day5",
+      "word": "practice",
+      "mean": "练习",
+      "ex": "I practice every day.",
+      "excn": "我每天练习。"
     }
   ],
   "mistakes": [
