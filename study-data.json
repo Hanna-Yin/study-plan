@@ -12,7 +12,8 @@
     "e4": "1",
     "m5": "1",
     "e5": "1",
-    "m6": "1"
+    "m6": "1",
+    "e6": "1"
   },
   "words": [
     {
@@ -644,6 +645,41 @@
       "mean": "买",
       "ex": "I buy rice and vegetables.",
       "excn": "我买米饭和蔬菜。"
+    },
+    {
+      "day": "Day7",
+      "word": "her",
+      "mean": "她的（形容词性物主代词）",
+      "ex": "Her name is Hanna.",
+      "excn": "她的名字是汉娜。"
+    },
+    {
+      "day": "Day7",
+      "word": "his",
+      "mean": "他的",
+      "ex": "His name is Tom.",
+      "excn": "他的名字是汤姆。"
+    },
+    {
+      "day": "Day7",
+      "word": "in",
+      "mean": "在…里；在（某时间）",
+      "ex": "I study in the morning.",
+      "excn": "我在早晨学习。"
+    },
+    {
+      "day": "Day7",
+      "word": "and",
+      "mean": "和；并且",
+      "ex": "It eats meat and rice.",
+      "excn": "它吃肉和米饭。"
+    },
+    {
+      "day": "Day7",
+      "word": "to",
+      "mean": "到；去（也用于动词前）",
+      "ex": "I want to learn English.",
+      "excn": "我想学英语。"
     }
   ],
   "mistakes": [
