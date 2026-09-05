@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>第一周学习计划 · 高数+英语从0</title>
+<title>学习计划 · 高数+英语从0（第1-2周）</title>
 <style>
   * { box-sizing: border-box; }
   body { font-family: -apple-system, "Microsoft YaHei", sans-serif; background:#f7f8fa; color:#1f2329; max-width:780px; margin:0 auto; padding:16px; line-height:1.6; -webkit-text-size-adjust:100%; }
@@ -70,7 +70,9 @@
   .hist-block { margin-bottom:14px; }
   .hist-block-title { font-size:15px; font-weight:700; color:#1d4ed8; margin:4px 0 10px; border-left:4px solid #2563eb; padding-left:8px; }
   .hist-day { border:1px solid #e5e7eb; border-radius:10px; padding:12px; margin-bottom:12px; }
-  .hd-head { display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:15px; }
+  .hd-head { display:flex; align-items:center; gap:8px; margin-bottom:8px; font-size:15px; cursor:pointer; }
+  .hd-more { font-size:11px; color:#9ca3af; margin-left:auto; font-weight:500; }
+  .hd-body { margin-top:6px; }
   .hg { font-size:11px; padding:2px 8px; border-radius:999px; font-weight:600; }
   .hg.ok { background:#dcfce7; color:#15803d; }
   .hg.no { background:#f1f5f9; color:#94a3b8; }
@@ -86,7 +88,7 @@
   .tab-panel.active { display:block; }
   /* 每日练习 */
   .ex-day { border:1px solid #dbeafe; border-radius:10px; padding:12px; margin-bottom:12px; background:#f8fbff; }
-  .ex-head { font-weight:700; font-size:15px; color:#1e40af; margin-bottom:8px; }
+  .ex-head { font-weight:700; font-size:15px; color:#1e40af; margin-bottom:8px; cursor:pointer; display:flex; align-items:center; }
   .ex-item { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:8px 0; border-bottom:1px dashed #dbeafe; }
   .ex-item:last-child { border-bottom:none; }
   .ex-q { flex:1; min-width:200px; font-size:14px; }
@@ -94,8 +96,8 @@
 </style>
 </head>
 <body>
-<h1>第一周启动计划</h1>
-<div class="sub">高数从0 · 英语从0 ｜ 每天高数45min + 英语15min ｜ 做完即停，不求完美</div>
+<h1>考研起步计划 · 第1-2周</h1>
+<div class="sub">高数从0 · 英语从0 ｜ 每天高数45min + 英语15min ｜ 第1周：函数与极限 ｜ 第2周：连续与导数 ｜ 做完即停，不求完美</div>
 
 <div class="syncpanel" id="syncPanel">
   <div id="connectArea">
@@ -197,7 +199,14 @@ const math = [
  ["Day4","极限的性质与四则运算"],
  ["Day5","重要极限①：(1+1/n)^n→e 的直观含义"],
  ["Day6","简单极限计算：代入法、约分消零因子"],
- ["Day7","复盘：重做本周错题，把仍不懂的整理给AI"]
+ ["Day7","复盘：重做本周错题，把仍不懂的整理给AI"],
+ ["Day8","无穷小与无穷大：趋近 0 的量 / 无限变大的量"],
+ ["Day9","重要极限②：lim(x→0) sinx/x = 1"],
+ ["Day10","函数的连续性：极限值 = 函数值"],
+ ["Day11","导数的概念：瞬时变化率 / 曲线切线斜率"],
+ ["Day12","基本求导公式：幂函数、常数、eˣ 等"],
+ ["Day13","导数的四则运算：加减、数乘、乘除"],
+ ["Day14","复盘：重做本周错题，把仍不懂的整理给AI"]
 ];
 const eng = [
  ["Day1","背15个基础词 + AI造1句（如：I read a book. 逐词讲解）"],
@@ -206,7 +215,14 @@ const eng = [
  ["Day4","背15个基础词 + AI造1句（含今日词）"],
  ["Day5","背15个基础词 + AI造1句（含今日词）"],
  ["Day6","背15个基础词 + AI造1句（周末多复习前5天）"],
- ["Day7","复习本周约90个词 + 读1段极简英文"]
+ ["Day7","复习本周约90个词 + 读1段极简英文"],
+ ["Day8","背15个基础词（日常动作）+ AI造1句"],
+ ["Day9","背15个基础词（形容词/感受）+ AI造1句"],
+ ["Day10","背15个基础词（方位/介词）+ AI造1句"],
+ ["Day11","背15个基础词（时间/频率）+ AI造1句"],
+ ["Day12","背15个基础词（学习进阶）+ AI造1句"],
+ ["Day13","背15个基础词（生活/健康）+ AI造1句"],
+ ["Day14","复习本周约90个词 + 读1段极简英文"]
 ];
 
 // 每天详细内容：用于「学习回顾」与「每日练习」，全部离线可见
@@ -281,6 +297,82 @@ const days = [
   eng:{ summary:"复习本周约90个词 + 读1段极简英文",
     key:"把前面6天的词过一遍，能认、能读句就达标。",
     ex:[] }
+ },
+ {
+  id:"Day8",
+  math:{ topic:"无穷小与无穷大",
+    summary:"极限为 0 的量叫无穷小；绝对值无限变大的量叫无穷大。它们都是「变化趋势（变量）」，不是一个固定的数。",
+    key:"无穷小 ≠ 一个很小的数（如 0.001），而是「正在趋近 0 的变量」。两者关系：非零无穷小的倒数是无穷大，无穷大的倒数是无穷小。",
+    note:"上周你算的 (x−a) 在 x→a 时就是无穷小；1/x 在 x→∞ 时也是无穷小。这周后面求导、等价无穷小替换都建立在这个概念上。",
+    ex:[["当 x→0 时，x 是无穷小吗？","是（x 趋近 0）"],["当 x→∞ 时，1/x 是无穷小吗？","是（1/x 趋近 0）"],["当 x→∞ 时，x² 是什么量？","无穷大"]] },
+  eng:{ summary:"今日15词（日常动作）：make 做 · take 拿 · give 给 · come 来 · see 看见 · look 看 · find 找到 · know 知道 · think 想 · say 说 · tell 告诉 · ask 问 · put 放 · open 打开 · close 关",
+    key:"全是高频动作动词，搭配已学的 I / you / my 就能拼出完整句子。",
+    ex:[["用今日词造1句","I make a cake. 我做一个蛋糕。 / Please open the book. 请打开书。"]] }
+ },
+ {
+  id:"Day9",
+  math:{ topic:"重要极限②：lim(x→0) sinx/x = 1",
+    summary:"当 x（弧度）趋近 0 时，sinx 与 x 几乎相等，两者的比值趋近 1。这是继 e 之后第二个必须记住的重要极限。",
+    key:"见到 sinx/x 且 x→0，直接写 1。关键：分子分母里那个「x」必须长得一模一样（sin2x/(2x) 也是 1，但 sinx/(3x) 是 1/3）。",
+    note:"注意 x 用弧度制，不是角度。数二常考的变形：sin(□)/□ → 1，只要方框里是同一个东西且它趋近 0。",
+    ex:[["lim(x→0) sinx/x","= 1"],["lim(x→0) sin(2x)/(2x)","= 1（把 2x 看成一个整体）"],["lim(x→0) sinx/(3x)","= 1/3（分母多乘了 3）"]] },
+  eng:{ summary:"今日15词（形容词/感受）：hot 热 · cold 冷 · new 新的 · old 旧的 · long 长 · short 短 · fast 快 · slow 慢 · easy 容易 · hard 难 · clean 干净 · dirty 脏 · cheap 便宜 · expensive 贵 · beautiful 漂亮",
+    key:"形容词直接跟在 be 动词后面：It is hot. / The book is new.",
+    ex:[["用今日词造1句","The book is new. 这本书是新的。 / It is hot today. 今天很热。"]] }
+ },
+ {
+  id:"Day10",
+  math:{ topic:"函数的连续性",
+    summary:"f 在 x=a 连续，就是 lim(x→a)f(x) = f(a)——「极限值等于函数值」。图像上就是能一笔画过去、不断开。",
+    key:"连续三条件：① f(a) 有定义 ② lim(x→a)f(x) 存在 ③ 两者相等，缺一条就断。多项式函数（如 x²+1）在定义域内处处连续，可以直接代入。",
+    note:"这也解释了上周为什么能「直接代入」——因为那些函数连续，极限值就等于函数值。遇到 0/0 时，函数在该点其实是个「可去间断点」（有个洞），约分就是把洞补上。",
+    ex:[["f(x)=x+1 在 x=2 连续吗？","连续（lim=3，f(2)=3，相等）"],["f(x)=x² 在 x=0 连续吗？","连续（lim=0，f(0)=0）"],["f(x)=1/x 在 x=0 连续吗？","不连续（x=0 处没有定义）"]] },
+  eng:{ summary:"今日15词（方位/介词）：on 在…上 · under 在…下 · near 在…附近 · here 这里 · there 那里 · up 向上 · down 向下 · left 左 · right 右 · front 前面 · back 后面 · between 在…之间 · with 和…一起 · from 从 · about 关于",
+    key:"方位介词放在名词前：on the table 在桌上 / under the bed 在床下。",
+    ex:[["用今日词造1句","The book is on the table. 书在桌子上。 / The cat is under the bed. 猫在床下。"]] }
+ },
+ {
+  id:"Day11",
+  math:{ topic:"导数的概念",
+    summary:"导数 = 瞬时变化率 = 曲线在该点切线的斜率。定义式：f'(a) = lim(h→0) [f(a+h) − f(a)] / h。",
+    key:"★ 你第一周算过的 lim(x→a)(x²−a²)/(x−a) = 2a，就是 x² 在 x=a 处的导数！导数不是新东西，它就是极限的一个应用。",
+    note:"几何意义：先取两点连一条割线（斜率 = 平均变化率），让两点无限靠近，割线就变成切线（斜率 = 瞬时变化率）。这和极限「趋近」的思想完全一样。常数函数不变，所以导数为 0。",
+    ex:[["用定义求 f(x)=x² 在 x=3 的导数","f'(3)=6"],["f(x)=2x 在 x=1 的导数","f'(1)=2"],["常数 f(x)=5 的导数","0（常数不变，变化率为 0）"]] },
+  eng:{ summary:"今日15词（时间/频率）：always 总是 · often 经常 · sometimes 有时 · never 从不 · early 早 · late 晚 · hour 小时 · minute 分钟 · yesterday 昨天 · tomorrow 明天 · tonight 今晚 · soon 很快 · already 已经 · still 仍然 · again 再一次",
+    key:"频率副词放在动词前：I always study. / I never drink. 时间词常放句首或句尾。",
+    ex:[["用今日词造1句","I always study in the morning. 我总是在早晨学习。 / I never eat meat. 我从不吃肉。"]] }
+ },
+ {
+  id:"Day12",
+  math:{ topic:"基本求导公式",
+    summary:"(xⁿ)' = n·xⁿ⁻¹（幂次提前，次数减一）；(c)' = 0；(eˣ)' = eˣ；(sinx)' = cosx；(cosx)' = −sinx；(ln x)' = 1/x。",
+    key:"幂函数口诀：「幂次提前当系数，指数减一」。(x²)'=2x；(x³)'=3x²；(x⁵)'=5x⁴。常数求导一律是 0。",
+    note:"eˣ 是唯一「求导等于自己」的函数，这个特性后面解微分方程时非常重要，先记结论。",
+    ex:[["求 (x³)'","= 3x²"],["求 (x⁵)'","= 5x⁴"],["求 (7)'","= 0（常数的导数为 0）"]] },
+  eng:{ summary:"今日15词（学习进阶）：page 页 · chapter 章 · example 例子 · test 测试 · score 分数 · mistake 错误 · note 笔记 · plan 计划 · goal 目标 · improve 提高 · review 复习 · repeat 重复 · explain 解释 · mean 意思是 · practice 练习",
+    key:"围绕「学习」场景：I review my notes every day. / Please explain this word.",
+    ex:[["用今日词造1句","I review my notes every day. 我每天复习笔记。 / Please explain this word. 请解释这个词。"]] }
+ },
+ {
+  id:"Day13",
+  math:{ topic:"导数的四则运算",
+    summary:"(f±g)' = f'±g'；(c·f)' = c·f'；(f·g)' = f'g + fg'；(f/g)' = (f'g − fg')/g²。",
+    key:"先拿下加减和数乘（最简单也最常用）。乘法的口诀是「前导后不导 + 前不导后导」，慢慢练。",
+    note:"和极限的四则运算（Day4）长得很像，但乘除公式不一样——极限是直接乘除，导数的乘法要交叉相加，别混。",
+    ex:[["求 (x² + x)'","= 2x + 1"],["求 (3x²)'","= 3·2x = 6x"],["求 (x² + 3x − 1)'","= 2x + 3"]] },
+  eng:{ summary:"今日15词（生活/健康）：sleep 睡 · wake 醒 · walk 走 · run 跑 · sit 坐 · stand 站 · wash 洗 · cook 做饭 · clean 打扫 · rest 休息 · sick 生病的 · healthy 健康的 · body 身体 · head 头 · hand 手",
+    key:"日常生活动词：I walk to school. / I sleep at night. 注意 clean 既是形容词（干净的）也是动词（打扫）。",
+    ex:[["用今日词造1句","I walk to school. 我走路去学校。 / I sleep at night. 我晚上睡觉。"]] }
+ },
+ {
+  id:"Day14",
+  math:{ topic:"复盘日",
+    summary:"重做本周错题（无穷小、重要极限②、连续性、导数），把仍不懂的整理给 AI。",
+    key:"复盘比赶进度重要。这周从「极限」跨到了「导数」，把两块的联系想清楚就算大赢。",
+    ex:[] },
+  eng:{ summary:"复习本周约90个词 + 读1段极简英文",
+    key:"把 Day8~Day13 的词过一遍，能认、能读句就达标。",
+    ex:[] }
  }
 ];
 
@@ -323,8 +415,8 @@ function render(id, data, key){
 function update(){
   const m=math.filter((d,i)=>progress['m'+i]==='1').length;
   const e=eng.filter((d,i)=>progress['e'+i]==='1').length;
-  document.getElementById('mathProg').textContent='高数完成 '+m+' / 7';
-  document.getElementById('engProg').textContent='英语完成 '+e+' / 7';
+  document.getElementById('mathProg').textContent='高数完成 '+m+' / '+math.length;
+  document.getElementById('engProg').textContent='英语完成 '+e+' / '+eng.length;
 }
 function switchHist(t){
   document.getElementById('histMath').classList.toggle('active', t==='math');
@@ -340,6 +432,7 @@ function switchLib(t){
   btns[0].classList.toggle('active', t==='words');
   btns[1].classList.toggle('active', t==='mistakes');
 }
+function tog(id){ const el=document.getElementById(id); el.style.display = el.style.display==='none' ? 'block':'none'; }
 function renderHistory(){
   const boxM=document.getElementById('histMath');
   const boxE=document.getElementById('histEng');
@@ -347,24 +440,41 @@ function renderHistory(){
   days.forEach((d,i)=>{
     const md = progress['m'+i]==='1';
     const ed = progress['e'+i]==='1';
-    boxM.innerHTML += '<div class="hist-day"><div class="hd-head"><b>'+d.id+'</b>'+(md?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+'</div>'+
-      '<div class="hd-sec"><b>'+esc(d.math.topic)+'</b><div class="hd-t">'+esc(d.math.summary)+'</div><div class="hd-key">💡 重点：'+esc(d.math.key)+'</div>'+(d.math.note?'<div class="hd-note">📌 易错点：'+esc(d.math.note)+'</div>':'')+'</div></div>';
-    boxE.innerHTML += '<div class="hist-day"><div class="hd-head"><b>'+d.id+'</b>'+(ed?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+'</div>'+
-      '<div class="hd-sec"><b>'+esc(d.eng.summary.split('：')[0])+'</b><div class="hd-t">'+esc(d.eng.summary)+'</div><div class="hd-key">💡 重点：'+esc(d.eng.key)+'</div></div></div>';
+    const idm='hdm'+i, ide='hde'+i;
+    boxM.insertAdjacentHTML('beforeend',
+      '<div class="hist-day"><div class="hd-head" onclick="tog(\''+idm+'\')"><b>'+d.id+'</b>'+
+      (md?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+
+      '<span class="hd-more">▾ 展开</span></div>'+
+      '<div class="hd-body" id="'+idm+'" style="display:none"><div class="hd-sec"><b>'+esc(d.math.topic)+'</b>'+
+      '<div class="hd-t">'+esc(d.math.summary)+'</div>'+
+      '<div class="hd-key">💡 重点：'+esc(d.math.key)+'</div>'+
+      (d.math.note?'<div class="hd-note">📌 易错点：'+esc(d.math.note)+'</div>':'')+
+      '</div></div></div>');
+    boxE.insertAdjacentHTML('beforeend',
+      '<div class="hist-day"><div class="hd-head" onclick="tog(\''+ide+'\')"><b>'+d.id+'</b>'+
+      (ed?'<span class="hg ok">✓ 已完成</span>':'<span class="hg no">未完成</span>')+
+      '<span class="hd-more">▾ 展开</span></div>'+
+      '<div class="hd-body" id="'+ide+'" style="display:none"><div class="hd-sec"><b>'+esc(d.eng.summary.split('：')[0])+'</b>'+
+      '<div class="hd-t">'+esc(d.eng.summary)+'</div>'+
+      '<div class="hd-key">💡 重点：'+esc(d.eng.key)+'</div>'+
+      (d.eng.note?'<div class="hd-note">📌 易错点：'+esc(d.eng.note)+'</div>':'')+
+      '</div></div></div>');
   });
 }
 let exCounter=0;
 function renderExercises(){
   const box=document.getElementById('exbox'); box.innerHTML='';
-  days.forEach(d=>{
+  days.forEach((d,i)=>{
     if((!d.math.ex || !d.math.ex.length) && (!d.eng.ex || !d.eng.ex.length)) return;
     const card=document.createElement('div'); card.className='ex-day';
-    let html='<div class="ex-head">'+d.id+'</div>';
+    const bid='exb'+i;
+    let html='<div class="ex-head" onclick="tog(\''+bid+'\')">'+d.id+'<span class="hd-more">▾ 展开</span></div><div id="'+bid+'" style="display:none">';
     const all=[].concat((d.math.ex||[]).map(q=>['📐',q]), (d.eng.ex||[]).map(q=>['🔤',q]));
     all.forEach(q=>{
       const qid='exa'+(exCounter++);
       html+='<div class="ex-item"><div class="ex-q">'+q[0]+' '+esc(q[1][0])+'</div><button class="sec sm" onclick="toggleAns(\''+qid+'\')">显示答案</button><div class="ex-a" id="'+qid+'" style="display:none">'+esc(q[1][1])+'</div></div>';
     });
+    html+='</div>';
     card.innerHTML=html; box.appendChild(card);
   });
 }
