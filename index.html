@@ -93,6 +93,16 @@
   .ex-item:last-child { border-bottom:none; }
   .ex-q { flex:1; min-width:200px; font-size:14px; }
   .ex-a { width:100%; font-size:14px; color:#059669; background:#ecfdf5; border-radius:6px; padding:6px 10px; }
+  /* 卡片折叠 */
+  .coll-btn { float:right; font-size:12px; font-weight:600; color:#2563eb; background:#eff6ff; border:1px solid #bfdbfe; border-radius:999px; padding:3px 12px; cursor:pointer; margin-top:0; }
+  .coll-btn:hover { background:#dbeafe; }
+  /* 重点笔记 */
+  .note-group { margin-bottom:14px; }
+  .note-cat { font-size:13px; font-weight:700; color:#b45309; margin:4px 0 8px; border-left:4px solid #f59e0b; padding-left:8px; }
+  .note-item { border:1px solid #bfdbfe; background:#f5f9ff; border-radius:10px; padding:10px 12px; margin-bottom:10px; }
+  .note-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+  .note-title { font-size:14px; font-weight:700; color:#1e3a8a; }
+  .note-content { font-size:13px; color:#374151; margin-top:5px; line-height:1.6; }
 </style>
 </head>
 <body>
@@ -124,25 +134,30 @@
 </div>
 
 <div class="card">
-  <h2>📐 高数（数二方向 · 从0起步 · 地基周）</h2>
-  <div id="math"></div>
-  <div class="progress" id="mathProg"></div>
-  <div class="tip">每天节奏：前15min让AI讲解+例题 → 中间20min自己做3题 → 后10min核对。<b>只做出1道也算赢。</b></div>
+  <h2>📐 高数（数二方向 · 从0起步 · 地基周）<button class="coll-btn" onclick="toggleBody('mathBody',this)">▴ 展开打卡</button></h2>
+  <div id="mathBody" style="display:none">
+    <div id="math"></div>
+    <div class="progress" id="mathProg"></div>
+  </div>
+  <div class="tip">每天节奏：前15min让AI讲解+例题 → 中间20min自己做3题 → 后10min核对。<b>只做出1道也算赢。</b>点右上「▴ 展开打卡」可勾选每日完成。</div>
 </div>
 
 <div class="card">
-  <h2>🔤 英语（考研英二 · 从0起步）</h2>
-  <div id="eng"></div>
-  <div class="progress" id="engProg"></div>
-  <div class="tip">每天：APP背15个最基础核心词 + 让AI用当日词造1个简单句并逐词讲。<b>背了词+读了1句就算赢。</b>若音标不会，前两天让AI顺带带过字母发音即可。</div>
+  <h2>🔤 英语（考研英二 · 从0起步）<button class="coll-btn" onclick="toggleBody('engBody',this)">▴ 展开打卡</button></h2>
+  <div id="engBody" style="display:none">
+    <div id="eng"></div>
+    <div class="progress" id="engProg"></div>
+  </div>
+  <div class="tip">每天：背15个最基础核心词 + 让AI用当日词造1个简单句并逐词讲。<b>背了词+读了1句就算赢。</b>点右上「▴ 展开打卡」可勾选每日完成。</div>
 </div>
 
 <div class="card" id="libCard">
   <h2>📚 我的词库 & 错题（自动同步）</h2>
-  <div class="tip">点下方标签切换查看。📕 单词库由专家每天帮你整理（含中文意思+例句），<b>你不用自己添加</b>；点下方日历的某一天，就只看那天的词。📒 错题库记易错点，可随手记。两者都会自动同步到每台设备。</div>
+  <div class="tip">点下方标签切换查看。📕 单词库由专家每天帮你整理（含中文意思+例句），<b>你不用自己添加</b>；点下方日历的某一天，就只看那天的词。📒 错题库记易错点，可随手记。📌 <b>重点笔记</b>把提公因式、平方差、重要极限①等核心公式/概念整合在一起，方便总复习——也可自己加。</div>
   <div class="tabs">
     <button class="tab-btn active" onclick="switchLib('words')">📕 单词库</button>
     <button class="tab-btn" onclick="switchLib('mistakes')">📒 错题库</button>
+    <button class="tab-btn" onclick="switchLib('notes')">📌 重点笔记</button>
   </div>
   <div id="libWords" class="tab-panel active">
     <input id="wdSearch" class="wd-search" placeholder="🔍 搜单词 / 中文意思（如 happy / 开心）" oninput="renderWords()">
@@ -162,6 +177,20 @@
       <button onclick="addMistake()">保存这条错题</button>
     </div>
     <div id="mkList"></div>
+  </div>
+  <div id="libNotes" class="tab-panel">
+    <div class="mk-form">
+      <select id="ntCat">
+        <option value="高数·公式">高数·公式</option>
+        <option value="高数·概念">高数·概念</option>
+        <option value="英语·重点">英语·重点</option>
+        <option value="其他">其他</option>
+      </select>
+      <input id="ntTitle" placeholder="重点标题（如：提公因式）">
+      <textarea id="ntContent" placeholder="具体内容 / 记忆口诀（可空）"></textarea>
+      <button onclick="addNote()">保存这条重点</button>
+    </div>
+    <div id="ntList"></div>
   </div>
 </div>
 
@@ -380,6 +409,7 @@ const REPO_NAME = 'study-plan';
 let progress = {};
 let mistakes = [];
 let words = [];
+let notes = [];
 let ghToken = localStorage.getItem('gh_token') || '';
 let ghRepo  = localStorage.getItem('gh_repo') || '';
 let ghSha   = localStorage.getItem('gh_sha') || '';
@@ -391,14 +421,32 @@ const SEED_MISTAKES = [
  { date:'2026-09-04', subject:'英语', wrong:'They go to eat hamburger', right:'They go to eat a hamburger / hamburgers', note:'hamburger 可数名词，单数前加 a 或变复数' }
 ];
 
+// 重点笔记：核心公式/概念整合（专家预置，可删可加）
+const SEED_NOTES = [
+ {cat:"高数·公式", title:"提公因式（x→0 约掉分母 x）", content:"x²+2x = x·x + 2·x = x(x+2)。两项都含同一个字母 x，把 x 提出来。极限里：分子提 x 后约掉分母的 x（x≠0 合法），再代入。例：lim(x→0)(x²+2x)/x = lim(x→0)(x+2) = 2。"},
+ {cat:"高数·公式", title:"平方差公式（x→a 约掉 x−a）", content:"a²−b² = (a+b)(a−b)。lim(x→a)(x²−a²)/(x−a) = 2a。例：lim(x→5)(x²−25)/(x−5) = 10。带系数 k 时：(x²−a²)/k(x−a) = 2a/k。"},
+ {cat:"高数·公式", title:"完全平方公式（结果恒为 0）", content:"(x−a)²/(x−a) = x−a → 代入 a 得 0。约掉一个 (x−a) 还剩一个，不是约光变 1。带系数也不影响：/k(x−a) → 0/k = 0。例：lim(x→3)(x²−6x+9)/(x−3) = 0。"},
+ {cat:"高数·概念", title:"极限里分母不是 0", content:"x→a 表示 x 无限接近 a 但永远不等于 a，所以 (x−a)/(x−a)=1 的约分合法。代入 x=2.9 分母是 −0.1，x=3.01 分母是 0.01，越来越小但从不为 0。极限问「趋近几」，不是「x=a 时等于几」。"},
+ {cat:"高数·概念", title:"0/0 处理三步 + 收尾三查", content:"① 先代入；② 若出现 0/0，先因式分解约分/化简（提公因式、平方差、完全平方、有理化、通分）；③ 再代入。算完做收尾三查：剩下什么式子？代进去是几？分母系数漏了没？"},
+ {cat:"高数·公式", title:"重要极限①：(1+1/n)ⁿ → e", content:"n→∞ 时，(1+1/n)ⁿ 无限接近 e ≈ 2.718。见到就写 e，绝不是 1！1^∞ 是未定式：底数趋向 1 和指数变大在「拔河」，僵持在 e。"},
+ {cat:"高数·公式", title:"重要极限②：lim(x→0) sinx/x = 1", content:"x（弧度）趋近 0 时，sinx 与 x 几乎相等。口诀：sin(□)/□ → 1，方框里必须是同一个东西且趋近 0。sin(2x)/(2x)=1；sin(x)/(3x)=1/3（分母多乘 3）。"},
+ {cat:"高数·概念", title:"连续性三条件", content:"f 在 x=a 连续 ⇔ ① f(a) 有定义 ② lim(x→a)f(x) 存在 ③ 两者相等。连续函数（如多项式）可直接代入。0/0 是可去间断点（有个洞），约分即补洞。"},
+ {cat:"高数·公式", title:"基本求导公式（幂次优先）", content:"(xⁿ)' = n·xⁿ⁻¹（幂次提前当系数，指数减一）；(c)'=0；(eˣ)'=eˣ；(sinx)'=cosx；(cosx)'=−sinx；(lnx)'=1/x。例：(x³)'=3x²，(7)'=0。"},
+ {cat:"高数·公式", title:"导数四则运算", content:"(f±g)'=f'±g'；(c·f)'=c·f'；(f·g)'=f'g+fg'；(f/g)'=(f'g−fg')/g²。先拿加减和数乘。★ 第一周算的 lim(x→a)(x²−a²)/(x−a)=2a，就是 x² 在 x=a 处的导数！"},
+ {cat:"英语·重点", title:"he / his / her 区别", content:"he=他（主格：He is a student.）；his=他的（His name is Tom.）；her=她的（Her name is Hanna.）。这三个是后来补进词库的。"},
+ {cat:"英语·重点", title:"阅读高频小词", content:"in=在（里/某时间）；and=和；to=到/去（也用于动词前，如 I want to learn.）。短文中极常用。"}
+];
+
 // 首跑注入种子
 if(!localStorage.getItem('study_progress')){ progress = Object.assign({}, SEED_PROGRESS); localStorage.setItem('study_progress', JSON.stringify(progress)); }
 else progress = JSON.parse(localStorage.getItem('study_progress')||'{}');
 if(!localStorage.getItem('study_mistakes')){ mistakes = SEED_MISTAKES.slice(); localStorage.setItem('study_mistakes', JSON.stringify(mistakes)); }
 else mistakes = JSON.parse(localStorage.getItem('study_mistakes')||'[]');
 words = JSON.parse(localStorage.getItem('study_words')||'[]');
+notes = JSON.parse(localStorage.getItem('study_notes')||'[]');
+if(!localStorage.getItem('study_notes')){ notes = SEED_NOTES.slice(); localStorage.setItem('study_notes', JSON.stringify(notes)); }
 
-function saveLocal(){ localStorage.setItem('study_progress', JSON.stringify(progress)); localStorage.setItem('study_mistakes', JSON.stringify(mistakes)); localStorage.setItem('study_words', JSON.stringify(words)); }
+function saveLocal(){ localStorage.setItem('study_progress', JSON.stringify(progress)); localStorage.setItem('study_mistakes', JSON.stringify(mistakes)); localStorage.setItem('study_words', JSON.stringify(words)); localStorage.setItem('study_notes', JSON.stringify(notes)); }
 function render(id, data, key){
   const box=document.getElementById(id); box.innerHTML='';
   data.forEach((d,i)=>{
@@ -428,9 +476,11 @@ function switchHist(t){
 function switchLib(t){
   document.getElementById('libWords').classList.toggle('active', t==='words');
   document.getElementById('libMistakes').classList.toggle('active', t==='mistakes');
+  document.getElementById('libNotes').classList.toggle('active', t==='notes');
   const btns=document.querySelectorAll('#libCard .tab-btn');
   btns[0].classList.toggle('active', t==='words');
   btns[1].classList.toggle('active', t==='mistakes');
+  btns[2].classList.toggle('active', t==='notes');
 }
 function tog(id){ const el=document.getElementById(id); el.style.display = el.style.display==='none' ? 'block':'none'; }
 function renderHistory(){
@@ -503,6 +553,35 @@ function addMistake(){
   document.getElementById('mkWrong').value=''; document.getElementById('mkRight').value=''; document.getElementById('mkNote').value='';
 }
 function delMistake(i){ if(confirm('删除这条错题？')){ mistakes.splice(i,1); saveLocal(); renderMistakes(); scheduleSync(); } }
+function toggleBody(id, btn){ const el=document.getElementById(id); const hidden=el.style.display==='none'; el.style.display=hidden?'block':'none'; btn.textContent=hidden?'▾ 收起':'▴ 展开打卡'; }
+function renderNotes(){
+  const box=document.getElementById('ntList'); if(!box) return;
+  box.innerHTML='';
+  if(!notes.length){ box.innerHTML='<div class="mk-empty">还没有重点笔记。重要的公式、易错点随手记一条，总复习时最有用。</div>'; return; }
+  const order=[]; const groups={};
+  notes.forEach(n=>{ const c=n.cat||'其他'; if(!groups[c]){ groups[c]=[]; order.push(c); } groups[c].push(n); });
+  order.forEach(c=>{
+    const g=document.createElement('div'); g.className='note-group';
+    g.innerHTML='<div class="note-cat">'+esc(c)+'</div>';
+    groups[c].forEach(n=>{
+      const realIdx=notes.indexOf(n);
+      const el=document.createElement('div'); el.className='note-item';
+      el.innerHTML='<div class="note-top"><span class="note-title">'+esc(n.title)+'</span><button class="sec sm" onclick="delNote('+realIdx+')">删除</button></div>'+
+        (n.content?'<div class="note-content">'+esc(n.content)+'</div>':'');
+      g.appendChild(el);
+    });
+    box.appendChild(g);
+  });
+}
+function addNote(){
+  const title=document.getElementById('ntTitle').value.trim();
+  const content=document.getElementById('ntContent').value.trim();
+  if(!title && !content){ alert('至少填一项'); return; }
+  notes.push({ cat:document.getElementById('ntCat').value, title, content, date:new Date().toISOString().slice(0,10) });
+  saveLocal(); renderNotes(); scheduleSync();
+  document.getElementById('ntTitle').value=''; document.getElementById('ntContent').value='';
+}
+function delNote(i){ if(confirm('删除这条重点笔记？')){ notes.splice(i,1); saveLocal(); renderNotes(); scheduleSync(); } }
 let wdSelectedDay='Day1';
 function wdRow(w){
   const realIdx=words.indexOf(w);
@@ -547,24 +626,25 @@ function renderWords(){
 }
 function resetAll(){ if(confirm('确定清空所有勾选（错题保留）？')){ progress={}; saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderHistory(); scheduleSync(); } }
 function exportData(){
-  const blob=new Blob([JSON.stringify({progress,mistakes,words})],{type:'application/json'});
+  const blob=new Blob([JSON.stringify({progress,mistakes,words,notes})],{type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='study-data.json'; a.click();
 }
 function importData(ev){
   const f=ev.target.files[0]; if(!f) return;
   const r=new FileReader(); r.onload=()=>{
-    try{ const o=JSON.parse(r.result); if(o.progress){progress=o.progress;} if(o.mistakes){mistakes=o.mistakes;} if(o.words){words=o.words;} saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderWords(); alert('数据已导入'); }catch(e){ alert('文件格式不对'); }
+    try{ const o=JSON.parse(r.result); if(o.progress){progress=o.progress;} if(o.mistakes){mistakes=o.mistakes;} if(o.words){words=o.words;} if(o.notes){notes=o.notes;} saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderWords(); renderNotes(); alert('数据已导入'); }catch(e){ alert('文件格式不对'); }
   }; r.readAsText(f);
 }
 
 // ---- 云同步（统一 study-data.json） ----
 function setStatus(t, cls){ const s=document.getElementById('syncStatus'); s.textContent=t; s.className='syncstatus '+cls; }
-function collectData(){ return {progress, mistakes, words}; }
+function collectData(){ return {progress, mistakes, words, notes}; }
 function applyData(d){
   if(d && d.progress){ progress=d.progress; }
   if(d && Array.isArray(d.mistakes)){ mistakes=d.mistakes; }
   if(d && Array.isArray(d.words)){ words=d.words; }
-  saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises(); renderWords();
+  if(d && Array.isArray(d.notes)){ notes=d.notes; }
+  saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises(); renderWords(); renderNotes();
 }
 async function ghUser(){
   const r=await fetch('https://api.github.com/user',{headers:{Authorization:'Bearer '+ghToken}});
@@ -639,7 +719,7 @@ function refreshSyncUI(){
     refreshSyncUI();
   }
 })();
-render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises(); renderWords();
+render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises(); renderWords(); renderNotes();
 </script>
 </body>
 </html>
