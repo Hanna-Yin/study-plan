@@ -10,7 +10,8 @@
     "e3": "1",
     "m4": "1",
     "e4": "1",
-    "m5": "1"
+    "m5": "1",
+    "e5": "1"
   },
   "words": [
     {
@@ -537,6 +538,111 @@
       "mean": "练习",
       "ex": "I practice every day.",
       "excn": "我每天练习。"
+    },
+    {
+      "day": "Day6",
+      "word": "morning",
+      "mean": "早晨；上午",
+      "ex": "I study in the morning.",
+      "excn": "我早晨学习。"
+    },
+    {
+      "day": "Day6",
+      "word": "evening",
+      "mean": "晚上",
+      "ex": "I go home in the evening.",
+      "excn": "我晚上回家。"
+    },
+    {
+      "day": "Day6",
+      "word": "week",
+      "mean": "周；星期",
+      "ex": "I practice every week.",
+      "excn": "我每周练习。"
+    },
+    {
+      "day": "Day6",
+      "word": "month",
+      "mean": "月",
+      "ex": "A year has 12 months.",
+      "excn": "一年有 12 个月。"
+    },
+    {
+      "day": "Day6",
+      "word": "year",
+      "mean": "年",
+      "ex": "A year has 12 months.",
+      "excn": "一年有 12 个月。"
+    },
+    {
+      "day": "Day6",
+      "word": "number",
+      "mean": "数字",
+      "ex": "I know the number.",
+      "excn": "我知道这个数字。"
+    },
+    {
+      "day": "Day6",
+      "word": "color",
+      "mean": "颜色",
+      "ex": "What color is it?",
+      "excn": "它是什么颜色？"
+    },
+    {
+      "day": "Day6",
+      "word": "food",
+      "mean": "食物",
+      "ex": "I buy food.",
+      "excn": "我买食物。"
+    },
+    {
+      "day": "Day6",
+      "word": "drink",
+      "mean": "喝",
+      "ex": "I drink water.",
+      "excn": "我喝水。"
+    },
+    {
+      "day": "Day6",
+      "word": "meat",
+      "mean": "肉",
+      "ex": "I eat meat.",
+      "excn": "我吃肉。"
+    },
+    {
+      "day": "Day6",
+      "word": "rice",
+      "mean": "米饭",
+      "ex": "I eat rice.",
+      "excn": "我吃米饭。"
+    },
+    {
+      "day": "Day6",
+      "word": "vegetable",
+      "mean": "蔬菜",
+      "ex": "I buy vegetables.",
+      "excn": "我买蔬菜。"
+    },
+    {
+      "day": "Day6",
+      "word": "fruit",
+      "mean": "水果",
+      "ex": "I like fruit.",
+      "excn": "我喜欢水果。"
+    },
+    {
+      "day": "Day6",
+      "word": "money",
+      "mean": "钱",
+      "ex": "I have money.",
+      "excn": "我有钱。"
+    },
+    {
+      "day": "Day6",
+      "word": "buy",
+      "mean": "买",
+      "ex": "I buy rice and vegetables.",
+      "excn": "我买米饭和蔬菜。"
     }
   ],
   "mistakes": [
