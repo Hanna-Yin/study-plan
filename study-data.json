@@ -1,1 +1,812 @@
-{"progress":{"m0":"1","m1":"1","e0":"1","e1":"1","m2":"1","e2":"1","m3":"1","e3":"1","m4":"1","e4":"1","m5":"1","e5":"1","m6":"1","e6":"1"},"mistakes":[{"date":"2026-09-04","subject":"英语","wrong":"she have a cat and a dog","right":"she has a cat and a dog","note":"she/he/it 是三单，have 要变成 has"},{"date":"2026-09-04","subject":"英语","wrong":"They go to eat hamburger","right":"They go to eat a hamburger / hamburgers","note":"hamburger 可数名词，单数前加 a 或变复数"},{"date":"2026-09-04","subject":"英语","wrong":"I want a cup of offer（译：我需要一杯咖啡）","right":"I want a cup of coffee.（我想要一杯咖啡）","note":"offer=提供/提议，不是咖啡；coffee=咖啡。且 I want 对应「我想要」而非「我需要」(need)"},{"date":"2026-09-04","subject":"高数","wrong":"（我卡住的地方）(1+1/10)^10 不会算，不知道上标 ¹⁰ 是什么意思","right":"(1+1/10)^10 = 1.1^10 ≈ 2.59","note":"📊 连乘阶梯表：1.1²=1.21；1.1³=1.331；1.1⁵=1.61；1.1¹⁰=2.59。要点：先算括号里 1+1/10=1.1，再连乘 10 次；¹⁰ 表示「10 个 1.1 相乘」，不是 1.1×10！"},{"date":"2026-09-04","subject":"高数","wrong":"（我第一反应答 1）1/n→0，所以 (1+0)^n = 1^n = 1","right":"⭐⭐⭐ 看到 (1+1/n)^n，就写 e（≈2.718），绝不是 1！","note":"💡💡💡 重点·重要极限①：拔河——底数 (1+1/n) 趋向 1 把结果往下拉，指数 n 变大把结果往上拉，两股力量僵持在 e≈2.718。1^∞ 是未定式，不能只让底数先变成 1 而让指数停在原地，两个 n 是同一个 n、同时变大，必须一起看。"},{"date":"2026-09-05","subject":"高数","wrong":"（我的疑问）第2、3题的分母都等于 0 啊，怎么能约分？","right":"分母不是 0！x→a 时 x 只是「趋近」a，永远不等于 a，所以 (x−a)/(x−a)=1 的约分合法","note":"💡💡💡 核心概念：代入 x=2.9 / 2.99 / 3.01 时分母实际是 −0.1 / −0.01 / 0.01，越来越小但从来不为 0。极限问的是「式子趋近于几」，不是「x=a 时等于几」。记住：x 是贴着 a 走，不是站到 a 上。"},{"date":"2026-09-05","subject":"高数","wrong":"lim(x→3) (x²−6x+9)/(x−3) = (x−3)²/(x−3) = 1","right":"(x−3)²/(x−3) = x−3，再代入 x=3 → 0（不是 1）","note":"约分一次只能约掉「一个」(x−3)，还剩一个。(x−3)²=(x−3)(x−3)，除以 (x−3) 后剩下 (x−3)，不是约光变 1。约完之后一定要记得再代入算结果。"},{"date":"2026-09-05","subject":"高数","wrong":"lim(x→3) (x²−9)/(2x−6) = 9/2（因式分解、提系数 2 都做对了，栽在最后一步代入：把 x+3 里的 x 误当成 x²=9 代进去）","right":"= (x−3)(x+3) / 2(x−3) = (x+3)/2 → 代入 x=3 得 (3+3)/2 = 3","note":"⚠️⚠️⚠️ 马虎提醒（不是不会，是粗心）：约分和提系数全对，只错在收尾。约完之后「式子剩下什么就代什么」——这里剩的是 (x+3) 一次式，代 x=3 得 6，不是 9。每次算完回头查最后一步：① 剩下的是哪个式子？② 代进去是几？③ 有没有漏掉分母的系数？慢这三秒，比多练十道题管用。"},{"date":"2026-09-05","subject":"高数","wrong":"lim(x→5) (x²−25)/(x−5) = 0（把「平方差」错当成「完全平方」了）","right":"x²−25 只有两项 → 平方差 → (x−5)(x+5)/(x−5) = x+5 → 代入 5 得 10","note":"🔍 判别口诀：先数项数！两项相减（x²−25）→ 平方差，答案 2a（此处 2×5=10）；三项（x²−10x+25）→ 完全平方，答案恒为 0。这两题都带 25、都是 x→5，最容易混 —— 动手前先数清楚分子有几项。"}],"words":[{"day":"Day1","word":"a","mean":"一个（不定冠词，泛指）","ex":"I see a cat.","excn":"我看见一只猫。"},{"day":"Day1","word":"an","mean":"一个（用于元音音素前）","ex":"I have an apple.","excn":"我有一个苹果。"},{"day":"Day1","word":"the","mean":"这/那（定冠词，特指）","ex":"The book is red.","excn":"这本书是红色的。"},{"day":"Day1","word":"I","mean":"我","ex":"I am happy.","excn":"我很开心。"},{"day":"Day1","word":"you","mean":"你/你们","ex":"You are my friend.","excn":"你是我的朋友。"},{"day":"Day1","word":"he","mean":"他","ex":"He has a dog.","excn":"他有一只狗。"},{"day":"Day1","word":"she","mean":"她","ex":"She has a cat.","excn":"她有一只猫。"},{"day":"Day1","word":"it","mean":"它","ex":"It is a book.","excn":"它是一本书。"},{"day":"Day1","word":"is","mean":"是（用于 he/she/it）","ex":"He is my friend.","excn":"他是我的朋友。"},{"day":"Day1","word":"am","mean":"是（用于 I）","ex":"I am Hanna.","excn":"我是汉娜。"},{"day":"Day1","word":"are","mean":"是（用于 you/we/they）","ex":"You are good.","excn":"你很好。"},{"day":"Day1","word":"book","mean":"书","ex":"I read a book.","excn":"我读一本书。"},{"day":"Day1","word":"read","mean":"读/阅读","ex":"I read a book.","excn":"我读一本书。"},{"day":"Day1","word":"cat","mean":"猫","ex":"She has a cat.","excn":"她有一只猫。"},{"day":"Day1","word":"dog","mean":"狗","ex":"He has a dog.","excn":"他有一只狗。"},{"day":"Day2","word":"we","mean":"我们","ex":"We go to eat.","excn":"我们去吃。"},{"day":"Day2","word":"they","mean":"他们/她们","ex":"They have water.","excn":"他们有水。"},{"day":"Day2","word":"my","mean":"我的","ex":"My name is Hanna.","excn":"我的名字是汉娜。"},{"day":"Day2","word":"your","mean":"你的","ex":"Your book is red.","excn":"你的书是红色的。"},{"day":"Day2","word":"this","mean":"这个","ex":"This is a book.","excn":"这是一本书。"},{"day":"Day2","word":"that","mean":"那个","ex":"That is a cat.","excn":"那是一只猫。"},{"day":"Day2","word":"have","mean":"有（用于 I/we/you/they）","ex":"I have a book.","excn":"我有一本书。"},{"day":"Day2","word":"has","mean":"有（用于 he/she/it）","ex":"She has a cat.","excn":"她有一只猫。"},{"day":"Day2","word":"do","mean":"做","ex":"I do my work.","excn":"我做我的工作。"},{"day":"Day2","word":"go","mean":"去","ex":"We go to school.","excn":"我们去学校。"},{"day":"Day2","word":"eat","mean":"吃","ex":"They go to eat.","excn":"他们去吃。"},{"day":"Day2","word":"like","mean":"喜欢","ex":"I like my cat.","excn":"我喜欢我的猫。"},{"day":"Day2","word":"good","mean":"好的","ex":"You are good.","excn":"你很好。"},{"day":"Day2","word":"name","mean":"名字","ex":"My name is Hanna.","excn":"我的名字是汉娜。"},{"day":"Day2","word":"water","mean":"水","ex":"I have water.","excn":"我有水。"},{"day":"Day3","word":"no","mean":"不（否定回答）","ex":"No, I am not.","excn":"不，我不是。"},{"day":"Day3","word":"not","mean":"不（表否定）","ex":"I am not tired.","excn":"我不累。"},{"day":"Day3","word":"yes","mean":"是（肯定回答）","ex":"Yes, I am.","excn":"是的，我是。"},{"day":"Day3","word":"what","mean":"什么","ex":"What is your name?","excn":"你叫什么名字？"},{"day":"Day3","word":"who","mean":"谁","ex":"Who is he?","excn":"他是谁？"},{"day":"Day3","word":"where","mean":"哪里","ex":"Where is my book?","excn":"我的书在哪里？"},{"day":"Day3","word":"when","mean":"何时","ex":"When do you go?","excn":"你什么时候去？"},{"day":"Day3","word":"why","mean":"为什么","ex":"Why are you sad?","excn":"你为什么难过？"},{"day":"Day3","word":"how","mean":"怎样","ex":"How are you?","excn":"你好吗？"},{"day":"Day3","word":"big","mean":"大的","ex":"The cat is big.","excn":"这只猫很大。"},{"day":"Day3","word":"small","mean":"小的","ex":"The dog is small.","excn":"这只狗很小。"},{"day":"Day3","word":"red","mean":"红色","ex":"The book is red.","excn":"这本书是红色的。"},{"day":"Day3","word":"blue","mean":"蓝色","ex":"The water is blue.","excn":"这水是蓝色的。"},{"day":"Day3","word":"one","mean":"一","ex":"I have one book.","excn":"我有一本书。"},{"day":"Day3","word":"two","mean":"二","ex":"I have two books.","excn":"我有两本书。"},{"day":"Day4","word":"time","mean":"时间","ex":"I have no time.","excn":"我没时间。"},{"day":"Day4","word":"day","mean":"天/白天","ex":"Today is a good day.","excn":"今天是美好的一天。"},{"day":"Day4","word":"today","mean":"今天","ex":"Today I am happy.","excn":"今天我很开心。"},{"day":"Day4","word":"now","mean":"现在","ex":"I am tired now.","excn":"我现在累了。"},{"day":"Day4","word":"work","mean":"工作","ex":"I have work.","excn":"我有工作。"},{"day":"Day4","word":"study","mean":"学习","ex":"I want to study.","excn":"我想学习。"},{"day":"Day4","word":"school","mean":"学校","ex":"I go to school.","excn":"我去学校。"},{"day":"Day4","word":"home","mean":"家","ex":"I go home.","excn":"我回家。"},{"day":"Day4","word":"friend","mean":"朋友","ex":"You are my friend.","excn":"你是我的朋友。"},{"day":"Day4","word":"happy","mean":"开心的","ex":"I am happy.","excn":"我很开心。"},{"day":"Day4","word":"tired","mean":"累的","ex":"I am tired.","excn":"我累了。"},{"day":"Day4","word":"help","mean":"帮助","ex":"Can I help you?","excn":"我能帮你吗？"},{"day":"Day4","word":"want","mean":"想要","ex":"I want a book.","excn":"我想要一本书。"},{"day":"Day4","word":"need","mean":"需要","ex":"I need help.","excn":"我需要帮助。"},{"day":"Day4","word":"can","mean":"能/可以","ex":"I can go.","excn":"我能去。"},{"day":"Day5","word":"language","mean":"语言","ex":"English is a language.","excn":"英语是一门语言。"},{"day":"Day5","word":"word","mean":"单词","ex":"This word is new.","excn":"这个单词是新的。"},{"day":"Day5","word":"sentence","mean":"句子","ex":"This is a sentence.","excn":"这是一个句子。"},{"day":"Day5","word":"speak","mean":"说（讲某种语言）","ex":"I speak English.","excn":"我说英语。"},{"day":"Day5","word":"listen","mean":"听","ex":"I listen to the teacher.","excn":"我听老师讲。"},{"day":"Day5","word":"write","mean":"写","ex":"I write a sentence.","excn":"我写一个句子。"},{"day":"Day5","word":"learn","mean":"学习","ex":"I learn English.","excn":"我学英语。"},{"day":"Day5","word":"teacher","mean":"老师","ex":"She is my teacher.","excn":"她是我的老师。"},{"day":"Day5","word":"student","mean":"学生","ex":"I am a student.","excn":"我是学生。"},{"day":"Day5","word":"class","mean":"课；班级","ex":"I have a class.","excn":"我有一节课。"},{"day":"Day5","word":"question","mean":"问题","ex":"I have a question.","excn":"我有一个问题。"},{"day":"Day5","word":"answer","mean":"回答","ex":"Please answer my question.","excn":"请回答我的问题。"},{"day":"Day5","word":"remember","mean":"记住","ex":"I remember your name.","excn":"我记得你的名字。"},{"day":"Day5","word":"understand","mean":"理解；懂","ex":"I don't understand.","excn":"我不懂。"},{"day":"Day5","word":"practice","mean":"练习","ex":"I practice every day.","excn":"我每天练习。"},{"day":"Day6","word":"morning","mean":"早晨；上午","ex":"I study in the morning.","excn":"我早晨学习。"},{"day":"Day6","word":"evening","mean":"晚上","ex":"I go home in the evening.","excn":"我晚上回家。"},{"day":"Day6","word":"week","mean":"周；星期","ex":"I practice every week.","excn":"我每周练习。"},{"day":"Day6","word":"month","mean":"月","ex":"A year has 12 months.","excn":"一年有 12 个月。"},{"day":"Day6","word":"year","mean":"年","ex":"A year has 12 months.","excn":"一年有 12 个月。"},{"day":"Day6","word":"number","mean":"数字","ex":"I know the number.","excn":"我知道这个数字。"},{"day":"Day6","word":"color","mean":"颜色","ex":"What color is it?","excn":"它是什么颜色？"},{"day":"Day6","word":"food","mean":"食物","ex":"I buy food.","excn":"我买食物。"},{"day":"Day6","word":"drink","mean":"喝","ex":"I drink water.","excn":"我喝水。"},{"day":"Day6","word":"meat","mean":"肉","ex":"I eat meat.","excn":"我吃肉。"},{"day":"Day6","word":"rice","mean":"米饭","ex":"I eat rice.","excn":"我吃米饭。"},{"day":"Day6","word":"vegetable","mean":"蔬菜","ex":"I buy vegetables.","excn":"我买蔬菜。"},{"day":"Day6","word":"fruit","mean":"水果","ex":"I like fruit.","excn":"我喜欢水果。"},{"day":"Day6","word":"money","mean":"钱","ex":"I have money.","excn":"我有钱。"},{"day":"Day6","word":"buy","mean":"买","ex":"I buy rice and vegetables.","excn":"我买米饭和蔬菜。"},{"day":"Day7","word":"her","mean":"她的（形容词性物主代词）","ex":"Her name is Hanna.","excn":"她的名字是汉娜。"},{"day":"Day7","word":"his","mean":"他的","ex":"His name is Tom.","excn":"他的名字是汤姆。"},{"day":"Day7","word":"in","mean":"在…里；在（某时间）","ex":"I study in the morning.","excn":"我在早晨学习。"},{"day":"Day7","word":"and","mean":"和；并且","ex":"It eats meat and rice.","excn":"它吃肉和米饭。"},{"day":"Day7","word":"to","mean":"到；去（也用于动词前）","ex":"I want to learn English.","excn":"我想学英语。"}]}
+{
+  "progress": {
+    "m0": "1",
+    "m1": "1",
+    "e0": "1",
+    "e1": "1",
+    "m2": "1",
+    "e2": "1",
+    "m3": "1",
+    "e3": "1",
+    "m4": "1",
+    "e4": "1",
+    "m5": "1",
+    "e5": "1",
+    "m6": "1",
+    "e6": "1"
+  },
+  "mistakes": [
+    {
+      "date": "2026-09-04",
+      "subject": "英语",
+      "wrong": "she have a cat and a dog",
+      "right": "she has a cat and a dog",
+      "note": "she/he/it 是三单，have 要变成 has"
+    },
+    {
+      "date": "2026-09-04",
+      "subject": "英语",
+      "wrong": "They go to eat hamburger",
+      "right": "They go to eat a hamburger / hamburgers",
+      "note": "hamburger 可数名词，单数前加 a 或变复数"
+    },
+    {
+      "date": "2026-09-04",
+      "subject": "英语",
+      "wrong": "I want a cup of offer（译：我需要一杯咖啡）",
+      "right": "I want a cup of coffee.（我想要一杯咖啡）",
+      "note": "offer=提供/提议，不是咖啡；coffee=咖啡。且 I want 对应「我想要」而非「我需要」(need)"
+    },
+    {
+      "date": "2026-09-04",
+      "subject": "高数",
+      "wrong": "（我卡住的地方）(1+1/10)^10 不会算，不知道上标 ¹⁰ 是什么意思",
+      "right": "(1+1/10)^10 = 1.1^10 ≈ 2.59",
+      "note": "📊 连乘阶梯表：1.1²=1.21；1.1³=1.331；1.1⁵=1.61；1.1¹⁰=2.59。要点：先算括号里 1+1/10=1.1，再连乘 10 次；¹⁰ 表示「10 个 1.1 相乘」，不是 1.1×10！"
+    },
+    {
+      "date": "2026-09-04",
+      "subject": "高数",
+      "wrong": "（我第一反应答 1）1/n→0，所以 (1+0)^n = 1^n = 1",
+      "right": "⭐⭐⭐ 看到 (1+1/n)^n，就写 e（≈2.718），绝不是 1！",
+      "note": "💡💡💡 重点·重要极限①：拔河——底数 (1+1/n) 趋向 1 把结果往下拉，指数 n 变大把结果往上拉，两股力量僵持在 e≈2.718。1^∞ 是未定式，不能只让底数先变成 1 而让指数停在原地，两个 n 是同一个 n、同时变大，必须一起看。"
+    },
+    {
+      "date": "2026-09-05",
+      "subject": "高数",
+      "wrong": "（我的疑问）第2、3题的分母都等于 0 啊，怎么能约分？",
+      "right": "分母不是 0！x→a 时 x 只是「趋近」a，永远不等于 a，所以 (x−a)/(x−a)=1 的约分合法",
+      "note": "💡💡💡 核心概念：代入 x=2.9 / 2.99 / 3.01 时分母实际是 −0.1 / −0.01 / 0.01，越来越小但从来不为 0。极限问的是「式子趋近于几」，不是「x=a 时等于几」。记住：x 是贴着 a 走，不是站到 a 上。"
+    },
+    {
+      "date": "2026-09-05",
+      "subject": "高数",
+      "wrong": "lim(x→3) (x²−6x+9)/(x−3) = (x−3)²/(x−3) = 1",
+      "right": "(x−3)²/(x−3) = x−3，再代入 x=3 → 0（不是 1）",
+      "note": "约分一次只能约掉「一个」(x−3)，还剩一个。(x−3)²=(x−3)(x−3)，除以 (x−3) 后剩下 (x−3)，不是约光变 1。约完之后一定要记得再代入算结果。"
+    },
+    {
+      "date": "2026-09-05",
+      "subject": "高数",
+      "wrong": "lim(x→3) (x²−9)/(2x−6) = 9/2（因式分解、提系数 2 都做对了，栽在最后一步代入：把 x+3 里的 x 误当成 x²=9 代进去）",
+      "right": "= (x−3)(x+3) / 2(x−3) = (x+3)/2 → 代入 x=3 得 (3+3)/2 = 3",
+      "note": "⚠️⚠️⚠️ 马虎提醒（不是不会，是粗心）：约分和提系数全对，只错在收尾。约完之后「式子剩下什么就代什么」——这里剩的是 (x+3) 一次式，代 x=3 得 6，不是 9。每次算完回头查最后一步：① 剩下的是哪个式子？② 代进去是几？③ 有没有漏掉分母的系数？慢这三秒，比多练十道题管用。"
+    },
+    {
+      "date": "2026-09-05",
+      "subject": "高数",
+      "wrong": "lim(x→5) (x²−25)/(x−5) = 0（把「平方差」错当成「完全平方」了）",
+      "right": "x²−25 只有两项 → 平方差 → (x−5)(x+5)/(x−5) = x+5 → 代入 5 得 10",
+      "note": "🔍 判别口诀：先数项数！两项相减（x²−25）→ 平方差，答案 2a（此处 2×5=10）；三项（x²−10x+25）→ 完全平方，答案恒为 0。这两题都带 25、都是 x→5，最容易混 —— 动手前先数清楚分子有几项。"
+    }
+  ],
+  "words": [
+    {
+      "day": "Day1",
+      "word": "a",
+      "mean": "一个（不定冠词，泛指）",
+      "ex": "I see a cat.",
+      "excn": "我看见一只猫。"
+    },
+    {
+      "day": "Day1",
+      "word": "an",
+      "mean": "一个（用于元音音素前）",
+      "ex": "I have an apple.",
+      "excn": "我有一个苹果。"
+    },
+    {
+      "day": "Day1",
+      "word": "the",
+      "mean": "这/那（定冠词，特指）",
+      "ex": "The book is red.",
+      "excn": "这本书是红色的。"
+    },
+    {
+      "day": "Day1",
+      "word": "I",
+      "mean": "我",
+      "ex": "I am happy.",
+      "excn": "我很开心。"
+    },
+    {
+      "day": "Day1",
+      "word": "you",
+      "mean": "你/你们",
+      "ex": "You are my friend.",
+      "excn": "你是我的朋友。"
+    },
+    {
+      "day": "Day1",
+      "word": "he",
+      "mean": "他",
+      "ex": "He has a dog.",
+      "excn": "他有一只狗。"
+    },
+    {
+      "day": "Day1",
+      "word": "she",
+      "mean": "她",
+      "ex": "She has a cat.",
+      "excn": "她有一只猫。"
+    },
+    {
+      "day": "Day1",
+      "word": "it",
+      "mean": "它",
+      "ex": "It is a book.",
+      "excn": "它是一本书。"
+    },
+    {
+      "day": "Day1",
+      "word": "is",
+      "mean": "是（用于 he/she/it）",
+      "ex": "He is my friend.",
+      "excn": "他是我的朋友。"
+    },
+    {
+      "day": "Day1",
+      "word": "am",
+      "mean": "是（用于 I）",
+      "ex": "I am Hanna.",
+      "excn": "我是汉娜。"
+    },
+    {
+      "day": "Day1",
+      "word": "are",
+      "mean": "是（用于 you/we/they）",
+      "ex": "You are good.",
+      "excn": "你很好。"
+    },
+    {
+      "day": "Day1",
+      "word": "book",
+      "mean": "书",
+      "ex": "I read a book.",
+      "excn": "我读一本书。"
+    },
+    {
+      "day": "Day1",
+      "word": "read",
+      "mean": "读/阅读",
+      "ex": "I read a book.",
+      "excn": "我读一本书。"
+    },
+    {
+      "day": "Day1",
+      "word": "cat",
+      "mean": "猫",
+      "ex": "She has a cat.",
+      "excn": "她有一只猫。"
+    },
+    {
+      "day": "Day1",
+      "word": "dog",
+      "mean": "狗",
+      "ex": "He has a dog.",
+      "excn": "他有一只狗。"
+    },
+    {
+      "day": "Day2",
+      "word": "we",
+      "mean": "我们",
+      "ex": "We go to eat.",
+      "excn": "我们去吃。"
+    },
+    {
+      "day": "Day2",
+      "word": "they",
+      "mean": "他们/她们",
+      "ex": "They have water.",
+      "excn": "他们有水。"
+    },
+    {
+      "day": "Day2",
+      "word": "my",
+      "mean": "我的",
+      "ex": "My name is Hanna.",
+      "excn": "我的名字是汉娜。"
+    },
+    {
+      "day": "Day2",
+      "word": "your",
+      "mean": "你的",
+      "ex": "Your book is red.",
+      "excn": "你的书是红色的。"
+    },
+    {
+      "day": "Day2",
+      "word": "this",
+      "mean": "这个",
+      "ex": "This is a book.",
+      "excn": "这是一本书。"
+    },
+    {
+      "day": "Day2",
+      "word": "that",
+      "mean": "那个",
+      "ex": "That is a cat.",
+      "excn": "那是一只猫。"
+    },
+    {
+      "day": "Day2",
+      "word": "have",
+      "mean": "有（用于 I/we/you/they）",
+      "ex": "I have a book.",
+      "excn": "我有一本书。"
+    },
+    {
+      "day": "Day2",
+      "word": "has",
+      "mean": "有（用于 he/she/it）",
+      "ex": "She has a cat.",
+      "excn": "她有一只猫。"
+    },
+    {
+      "day": "Day2",
+      "word": "do",
+      "mean": "做",
+      "ex": "I do my work.",
+      "excn": "我做我的工作。"
+    },
+    {
+      "day": "Day2",
+      "word": "go",
+      "mean": "去",
+      "ex": "We go to school.",
+      "excn": "我们去学校。"
+    },
+    {
+      "day": "Day2",
+      "word": "eat",
+      "mean": "吃",
+      "ex": "They go to eat.",
+      "excn": "他们去吃。"
+    },
+    {
+      "day": "Day2",
+      "word": "like",
+      "mean": "喜欢",
+      "ex": "I like my cat.",
+      "excn": "我喜欢我的猫。"
+    },
+    {
+      "day": "Day2",
+      "word": "good",
+      "mean": "好的",
+      "ex": "You are good.",
+      "excn": "你很好。"
+    },
+    {
+      "day": "Day2",
+      "word": "name",
+      "mean": "名字",
+      "ex": "My name is Hanna.",
+      "excn": "我的名字是汉娜。"
+    },
+    {
+      "day": "Day2",
+      "word": "water",
+      "mean": "水",
+      "ex": "I have water.",
+      "excn": "我有水。"
+    },
+    {
+      "day": "Day3",
+      "word": "no",
+      "mean": "不（否定回答）",
+      "ex": "No, I am not.",
+      "excn": "不，我不是。"
+    },
+    {
+      "day": "Day3",
+      "word": "not",
+      "mean": "不（表否定）",
+      "ex": "I am not tired.",
+      "excn": "我不累。"
+    },
+    {
+      "day": "Day3",
+      "word": "yes",
+      "mean": "是（肯定回答）",
+      "ex": "Yes, I am.",
+      "excn": "是的，我是。"
+    },
+    {
+      "day": "Day3",
+      "word": "what",
+      "mean": "什么",
+      "ex": "What is your name?",
+      "excn": "你叫什么名字？"
+    },
+    {
+      "day": "Day3",
+      "word": "who",
+      "mean": "谁",
+      "ex": "Who is he?",
+      "excn": "他是谁？"
+    },
+    {
+      "day": "Day3",
+      "word": "where",
+      "mean": "哪里",
+      "ex": "Where is my book?",
+      "excn": "我的书在哪里？"
+    },
+    {
+      "day": "Day3",
+      "word": "when",
+      "mean": "何时",
+      "ex": "When do you go?",
+      "excn": "你什么时候去？"
+    },
+    {
+      "day": "Day3",
+      "word": "why",
+      "mean": "为什么",
+      "ex": "Why are you sad?",
+      "excn": "你为什么难过？"
+    },
+    {
+      "day": "Day3",
+      "word": "how",
+      "mean": "怎样",
+      "ex": "How are you?",
+      "excn": "你好吗？"
+    },
+    {
+      "day": "Day3",
+      "word": "big",
+      "mean": "大的",
+      "ex": "The cat is big.",
+      "excn": "这只猫很大。"
+    },
+    {
+      "day": "Day3",
+      "word": "small",
+      "mean": "小的",
+      "ex": "The dog is small.",
+      "excn": "这只狗很小。"
+    },
+    {
+      "day": "Day3",
+      "word": "red",
+      "mean": "红色",
+      "ex": "The book is red.",
+      "excn": "这本书是红色的。"
+    },
+    {
+      "day": "Day3",
+      "word": "blue",
+      "mean": "蓝色",
+      "ex": "The water is blue.",
+      "excn": "这水是蓝色的。"
+    },
+    {
+      "day": "Day3",
+      "word": "one",
+      "mean": "一",
+      "ex": "I have one book.",
+      "excn": "我有一本书。"
+    },
+    {
+      "day": "Day3",
+      "word": "two",
+      "mean": "二",
+      "ex": "I have two books.",
+      "excn": "我有两本书。"
+    },
+    {
+      "day": "Day4",
+      "word": "time",
+      "mean": "时间",
+      "ex": "I have no time.",
+      "excn": "我没时间。"
+    },
+    {
+      "day": "Day4",
+      "word": "day",
+      "mean": "天/白天",
+      "ex": "Today is a good day.",
+      "excn": "今天是美好的一天。"
+    },
+    {
+      "day": "Day4",
+      "word": "today",
+      "mean": "今天",
+      "ex": "Today I am happy.",
+      "excn": "今天我很开心。"
+    },
+    {
+      "day": "Day4",
+      "word": "now",
+      "mean": "现在",
+      "ex": "I am tired now.",
+      "excn": "我现在累了。"
+    },
+    {
+      "day": "Day4",
+      "word": "work",
+      "mean": "工作",
+      "ex": "I have work.",
+      "excn": "我有工作。"
+    },
+    {
+      "day": "Day4",
+      "word": "study",
+      "mean": "学习",
+      "ex": "I want to study.",
+      "excn": "我想学习。"
+    },
+    {
+      "day": "Day4",
+      "word": "school",
+      "mean": "学校",
+      "ex": "I go to school.",
+      "excn": "我去学校。"
+    },
+    {
+      "day": "Day4",
+      "word": "home",
+      "mean": "家",
+      "ex": "I go home.",
+      "excn": "我回家。"
+    },
+    {
+      "day": "Day4",
+      "word": "friend",
+      "mean": "朋友",
+      "ex": "You are my friend.",
+      "excn": "你是我的朋友。"
+    },
+    {
+      "day": "Day4",
+      "word": "happy",
+      "mean": "开心的",
+      "ex": "I am happy.",
+      "excn": "我很开心。"
+    },
+    {
+      "day": "Day4",
+      "word": "tired",
+      "mean": "累的",
+      "ex": "I am tired.",
+      "excn": "我累了。"
+    },
+    {
+      "day": "Day4",
+      "word": "help",
+      "mean": "帮助",
+      "ex": "Can I help you?",
+      "excn": "我能帮你吗？"
+    },
+    {
+      "day": "Day4",
+      "word": "want",
+      "mean": "想要",
+      "ex": "I want a book.",
+      "excn": "我想要一本书。"
+    },
+    {
+      "day": "Day4",
+      "word": "need",
+      "mean": "需要",
+      "ex": "I need help.",
+      "excn": "我需要帮助。"
+    },
+    {
+      "day": "Day4",
+      "word": "can",
+      "mean": "能/可以",
+      "ex": "I can go.",
+      "excn": "我能去。"
+    },
+    {
+      "day": "Day5",
+      "word": "language",
+      "mean": "语言",
+      "ex": "English is a language.",
+      "excn": "英语是一门语言。"
+    },
+    {
+      "day": "Day5",
+      "word": "word",
+      "mean": "单词",
+      "ex": "This word is new.",
+      "excn": "这个单词是新的。"
+    },
+    {
+      "day": "Day5",
+      "word": "sentence",
+      "mean": "句子",
+      "ex": "This is a sentence.",
+      "excn": "这是一个句子。"
+    },
+    {
+      "day": "Day5",
+      "word": "speak",
+      "mean": "说（讲某种语言）",
+      "ex": "I speak English.",
+      "excn": "我说英语。"
+    },
+    {
+      "day": "Day5",
+      "word": "listen",
+      "mean": "听",
+      "ex": "I listen to the teacher.",
+      "excn": "我听老师讲。"
+    },
+    {
+      "day": "Day5",
+      "word": "write",
+      "mean": "写",
+      "ex": "I write a sentence.",
+      "excn": "我写一个句子。"
+    },
+    {
+      "day": "Day5",
+      "word": "learn",
+      "mean": "学习",
+      "ex": "I learn English.",
+      "excn": "我学英语。"
+    },
+    {
+      "day": "Day5",
+      "word": "teacher",
+      "mean": "老师",
+      "ex": "She is my teacher.",
+      "excn": "她是我的老师。"
+    },
+    {
+      "day": "Day5",
+      "word": "student",
+      "mean": "学生",
+      "ex": "I am a student.",
+      "excn": "我是学生。"
+    },
+    {
+      "day": "Day5",
+      "word": "class",
+      "mean": "课；班级",
+      "ex": "I have a class.",
+      "excn": "我有一节课。"
+    },
+    {
+      "day": "Day5",
+      "word": "question",
+      "mean": "问题",
+      "ex": "I have a question.",
+      "excn": "我有一个问题。"
+    },
+    {
+      "day": "Day5",
+      "word": "answer",
+      "mean": "回答",
+      "ex": "Please answer my question.",
+      "excn": "请回答我的问题。"
+    },
+    {
+      "day": "Day5",
+      "word": "remember",
+      "mean": "记住",
+      "ex": "I remember your name.",
+      "excn": "我记得你的名字。"
+    },
+    {
+      "day": "Day5",
+      "word": "understand",
+      "mean": "理解；懂",
+      "ex": "I don't understand.",
+      "excn": "我不懂。"
+    },
+    {
+      "day": "Day5",
+      "word": "practice",
+      "mean": "练习",
+      "ex": "I practice every day.",
+      "excn": "我每天练习。"
+    },
+    {
+      "day": "Day6",
+      "word": "morning",
+      "mean": "早晨；上午",
+      "ex": "I study in the morning.",
+      "excn": "我早晨学习。"
+    },
+    {
+      "day": "Day6",
+      "word": "evening",
+      "mean": "晚上",
+      "ex": "I go home in the evening.",
+      "excn": "我晚上回家。"
+    },
+    {
+      "day": "Day6",
+      "word": "week",
+      "mean": "周；星期",
+      "ex": "I practice every week.",
+      "excn": "我每周练习。"
+    },
+    {
+      "day": "Day6",
+      "word": "month",
+      "mean": "月",
+      "ex": "A year has 12 months.",
+      "excn": "一年有 12 个月。"
+    },
+    {
+      "day": "Day6",
+      "word": "year",
+      "mean": "年",
+      "ex": "A year has 12 months.",
+      "excn": "一年有 12 个月。"
+    },
+    {
+      "day": "Day6",
+      "word": "number",
+      "mean": "数字",
+      "ex": "I know the number.",
+      "excn": "我知道这个数字。"
+    },
+    {
+      "day": "Day6",
+      "word": "color",
+      "mean": "颜色",
+      "ex": "What color is it?",
+      "excn": "它是什么颜色？"
+    },
+    {
+      "day": "Day6",
+      "word": "food",
+      "mean": "食物",
+      "ex": "I buy food.",
+      "excn": "我买食物。"
+    },
+    {
+      "day": "Day6",
+      "word": "drink",
+      "mean": "喝",
+      "ex": "I drink water.",
+      "excn": "我喝水。"
+    },
+    {
+      "day": "Day6",
+      "word": "meat",
+      "mean": "肉",
+      "ex": "I eat meat.",
+      "excn": "我吃肉。"
+    },
+    {
+      "day": "Day6",
+      "word": "rice",
+      "mean": "米饭",
+      "ex": "I eat rice.",
+      "excn": "我吃米饭。"
+    },
+    {
+      "day": "Day6",
+      "word": "vegetable",
+      "mean": "蔬菜",
+      "ex": "I buy vegetables.",
+      "excn": "我买蔬菜。"
+    },
+    {
+      "day": "Day6",
+      "word": "fruit",
+      "mean": "水果",
+      "ex": "I like fruit.",
+      "excn": "我喜欢水果。"
+    },
+    {
+      "day": "Day6",
+      "word": "money",
+      "mean": "钱",
+      "ex": "I have money.",
+      "excn": "我有钱。"
+    },
+    {
+      "day": "Day6",
+      "word": "buy",
+      "mean": "买",
+      "ex": "I buy rice and vegetables.",
+      "excn": "我买米饭和蔬菜。"
+    },
+    {
+      "day": "Day7",
+      "word": "her",
+      "mean": "她的（形容词性物主代词）",
+      "ex": "Her name is Hanna.",
+      "excn": "她的名字是汉娜。"
+    },
+    {
+      "day": "Day7",
+      "word": "his",
+      "mean": "他的",
+      "ex": "His name is Tom.",
+      "excn": "他的名字是汤姆。"
+    },
+    {
+      "day": "Day7",
+      "word": "in",
+      "mean": "在…里；在（某时间）",
+      "ex": "I study in the morning.",
+      "excn": "我在早晨学习。"
+    },
+    {
+      "day": "Day7",
+      "word": "and",
+      "mean": "和；并且",
+      "ex": "It eats meat and rice.",
+      "excn": "它吃肉和米饭。"
+    },
+    {
+      "day": "Day7",
+      "word": "to",
+      "mean": "到；去（也用于动词前）",
+      "ex": "I want to learn English.",
+      "excn": "我想学英语。"
+    }
+  ],
+  "notes": [
+    {
+      "cat": "高数·公式",
+      "title": "提公因式（x→0 约掉分母 x）",
+      "content": "x²+2x = x·x + 2·x = x(x+2)。两项都含同一个字母 x，把 x 提出来。极限里：分子提 x 后约掉分母的 x（x≠0 合法），再代入。例：lim(x→0)(x²+2x)/x = lim(x→0)(x+2) = 2。"
+    },
+    {
+      "cat": "高数·公式",
+      "title": "平方差公式（x→a 约掉 x−a）",
+      "content": "a²−b² = (a+b)(a−b)。lim(x→a)(x²−a²)/(x−a) = 2a。例：lim(x→5)(x²−25)/(x−5) = 10。带系数 k 时：(x²−a²)/k(x−a) = 2a/k。"
+    },
+    {
+      "cat": "高数·公式",
+      "title": "完全平方公式（结果恒为 0）",
+      "content": "(x−a)²/(x−a) = x−a → 代入 a 得 0。约掉一个 (x−a) 还剩一个，不是约光变 1。带系数也不影响：/k(x−a) → 0/k = 0。例：lim(x→3)(x²−6x+9)/(x−3) = 0。"
+    },
+    {
+      "cat": "高数·概念",
+      "title": "极限里分母不是 0",
+      "content": "x→a 表示 x 无限接近 a 但永远不等于 a，所以 (x−a)/(x−a)=1 的约分合法。代入 x=2.9 分母是 −0.1，x=3.01 分母是 0.01，越来越小但从不为 0。极限问「趋近几」，不是「x=a 时等于几」。"
+    },
+    {
+      "cat": "高数·概念",
+      "title": "0/0 处理三步 + 收尾三查",
+      "content": "① 先代入；② 若出现 0/0，先因式分解约分/化简（提公因式、平方差、完全平方、有理化、通分）；③ 再代入。算完做收尾三查：剩下什么式子？代进去是几？分母系数漏了没？"
+    },
+    {
+      "cat": "高数·公式",
+      "title": "重要极限①：(1+1/n)ⁿ → e",
+      "content": "n→∞ 时，(1+1/n)ⁿ 无限接近 e ≈ 2.718。见到就写 e，绝不是 1！1^∞ 是未定式：底数趋向 1 和指数变大在「拔河」，僵持在 e。"
+    },
+    {
+      "cat": "高数·公式",
+      "title": "重要极限②：lim(x→0) sinx/x = 1",
+      "content": "x（弧度）趋近 0 时，sinx 与 x 几乎相等。口诀：sin(□)/□ → 1，方框里必须是同一个东西且趋近 0。sin(2x)/(2x)=1；sin(x)/(3x)=1/3（分母多乘 3）。"
+    },
+    {
+      "cat": "高数·概念",
+      "title": "连续性三条件",
+      "content": "f 在 x=a 连续 ⇔ ① f(a) 有定义 ② lim(x→a)f(x) 存在 ③ 两者相等。连续函数（如多项式）可直接代入。0/0 是可去间断点（有个洞），约分即补洞。"
+    },
+    {
+      "cat": "高数·公式",
+      "title": "基本求导公式（幂次优先）",
+      "content": "(xⁿ)' = n·xⁿ⁻¹（幂次提前当系数，指数减一）；(c)'=0；(eˣ)'=eˣ；(sinx)'=cosx；(cosx)'=−sinx；(lnx)'=1/x。例：(x³)'=3x²，(7)'=0。"
+    },
+    {
+      "cat": "高数·公式",
+      "title": "导数四则运算",
+      "content": "(f±g)'=f'±g'；(c·f)'=c·f'；(f·g)'=f'g+fg'；(f/g)'=(f'g−fg')/g²。先拿加减和数乘。★ 第一周算的 lim(x→a)(x²−a²)/(x−a)=2a，就是 x² 在 x=a 处的导数！"
+    },
+    {
+      "cat": "英语·重点",
+      "title": "he / his / her 区别",
+      "content": "he=他（主格：He is a student.）；his=他的（His name is Tom.）；her=她的（Her name is Hanna.）。这三个是后来补进词库的。"
+    },
+    {
+      "cat": "英语·重点",
+      "title": "阅读高频小词",
+      "content": "in=在（里/某时间）；and=和；to=到/去（也用于动词前，如 I want to learn.）。短文中极常用。"
+    }
+  ]
+}
