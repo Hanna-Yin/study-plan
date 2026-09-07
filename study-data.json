@@ -21,7 +21,9 @@
     "m9": "1",
     "e9": "1",
     "m10": "1",
-    "e10": "1"
+    "e10": "1",
+    "m11": "1",
+    "e11": "1"
   },
   "words": [
     {
@@ -1108,6 +1110,111 @@
       "mean": "总是",
       "ex": "He always smiles.",
       "excn": "他总是微笑。"
+    },
+    {
+      "day": "Day12",
+      "word": "learn",
+      "mean": "学习",
+      "ex": "I learn English every day.",
+      "excn": "我每天学英语。"
+    },
+    {
+      "day": "Day12",
+      "word": "study",
+      "mean": "学习 / 研",
+      "ex": "I study at night.",
+      "excn": "我晚上学习。"
+    },
+    {
+      "day": "Day12",
+      "word": "read",
+      "mean": "读",
+      "ex": "I read a book.",
+      "excn": "我读书。"
+    },
+    {
+      "day": "Day12",
+      "word": "write",
+      "mean": "写",
+      "ex": "I write words.",
+      "excn": "我写单词。"
+    },
+    {
+      "day": "Day12",
+      "word": "book",
+      "mean": "书",
+      "ex": "This is my book.",
+      "excn": "这是我的书。"
+    },
+    {
+      "day": "Day12",
+      "word": "word",
+      "mean": "单词",
+      "ex": "New word, new meaning.",
+      "excn": "新单词，新意思。"
+    },
+    {
+      "day": "Day12",
+      "word": "score",
+      "mean": "分数",
+      "ex": "My score is high.",
+      "excn": "我分数高。"
+    },
+    {
+      "day": "Day12",
+      "word": "test",
+      "mean": "测试",
+      "ex": "I have a test.",
+      "excn": "我有场测试。"
+    },
+    {
+      "day": "Day12",
+      "word": "pass",
+      "mean": "通过",
+      "ex": "I pass the test.",
+      "excn": "我通过了测试。"
+    },
+    {
+      "day": "Day12",
+      "word": "fail",
+      "mean": "失败 / 不及格",
+      "ex": "I do not fail.",
+      "excn": "我不会不及格。"
+    },
+    {
+      "day": "Day12",
+      "word": "practice",
+      "mean": "练习",
+      "ex": "Practice makes perfect.",
+      "excn": "熟能生巧。"
+    },
+    {
+      "day": "Day12",
+      "word": "remember",
+      "mean": "记住",
+      "ex": "Remember the words.",
+      "excn": "记住单词。"
+    },
+    {
+      "day": "Day12",
+      "word": "understand",
+      "mean": "理解",
+      "ex": "I understand math.",
+      "excn": "我懂数学。"
+    },
+    {
+      "day": "Day12",
+      "word": "question",
+      "mean": "问题",
+      "ex": "I have a question.",
+      "excn": "我有个问题。"
+    },
+    {
+      "day": "Day12",
+      "word": "answer",
+      "mean": "答案",
+      "ex": "The answer is right.",
+      "excn": "答案对了。"
     }
   ],
   "mistakes": [
