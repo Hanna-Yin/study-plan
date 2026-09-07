@@ -19,7 +19,9 @@
     "m8": "1",
     "e8": "1",
     "m9": "1",
-    "e9": "1"
+    "e9": "1",
+    "m10": "1",
+    "e10": "1"
   },
   "words": [
     {
@@ -1001,6 +1003,111 @@
       "mean": "关于",
       "ex": "a book about cats",
       "excn": "一本关于猫的书"
+    },
+    {
+      "day": "Day11",
+      "word": "time",
+      "mean": "时间",
+      "ex": "Time is money.",
+      "excn": "时间就是金钱。"
+    },
+    {
+      "day": "Day11",
+      "word": "day",
+      "mean": "天 / 日",
+      "ex": "I work every day.",
+      "excn": "我每天都工作。"
+    },
+    {
+      "day": "Day11",
+      "word": "night",
+      "mean": "夜",
+      "ex": "Good night!",
+      "excn": "晚安！"
+    },
+    {
+      "day": "Day11",
+      "word": "morning",
+      "mean": "早上",
+      "ex": "I read in the morning.",
+      "excn": "我早上读书。"
+    },
+    {
+      "day": "Day11",
+      "word": "evening",
+      "mean": "晚上",
+      "ex": "We eat in the evening.",
+      "excn": "我们晚上吃饭。"
+    },
+    {
+      "day": "Day11",
+      "word": "week",
+      "mean": "周",
+      "ex": "I go home once a week.",
+      "excn": "我每周回一次家。"
+    },
+    {
+      "day": "Day11",
+      "word": "month",
+      "mean": "月",
+      "ex": "This month is busy.",
+      "excn": "这个月很忙。"
+    },
+    {
+      "day": "Day11",
+      "word": "year",
+      "mean": "年",
+      "ex": "A year has 12 months.",
+      "excn": "一年有12个月。"
+    },
+    {
+      "day": "Day11",
+      "word": "hour",
+      "mean": "小时",
+      "ex": "I study for one hour.",
+      "excn": "我学习一小时。"
+    },
+    {
+      "day": "Day11",
+      "word": "minute",
+      "mean": "分钟",
+      "ex": "Wait a minute.",
+      "excn": "等一下。"
+    },
+    {
+      "day": "Day11",
+      "word": "today",
+      "mean": "今天",
+      "ex": "Today is sunny.",
+      "excn": "今天晴天。"
+    },
+    {
+      "day": "Day11",
+      "word": "tomorrow",
+      "mean": "明天",
+      "ex": "Tomorrow is Monday.",
+      "excn": "明天是周一。"
+    },
+    {
+      "day": "Day11",
+      "word": "yesterday",
+      "mean": "昨天",
+      "ex": "I was tired yesterday.",
+      "excn": "我昨天很累。"
+    },
+    {
+      "day": "Day11",
+      "word": "often",
+      "mean": "经常",
+      "ex": "I often drink water.",
+      "excn": "我经常喝水。"
+    },
+    {
+      "day": "Day11",
+      "word": "always",
+      "mean": "总是",
+      "ex": "He always smiles.",
+      "excn": "他总是微笑。"
     }
   ],
   "mistakes": [
