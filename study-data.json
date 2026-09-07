@@ -17,7 +17,9 @@
     "m7": "1",
     "e7": "1",
     "m8": "1",
-    "e8": "1"
+    "e8": "1",
+    "m9": "1",
+    "e9": "1"
   },
   "words": [
     {
@@ -894,6 +896,111 @@
       "mean": "漂亮的",
       "ex": "The flower is beautiful.",
       "excn": "这朵花很漂亮。"
+    },
+    {
+      "day": "Day10",
+      "word": "on",
+      "mean": "在…上",
+      "ex": "The book is on the table.",
+      "excn": "书在桌子上。"
+    },
+    {
+      "day": "Day10",
+      "word": "under",
+      "mean": "在…下",
+      "ex": "The cat is under the bed.",
+      "excn": "猫在床下。"
+    },
+    {
+      "day": "Day10",
+      "word": "near",
+      "mean": "在…附近",
+      "ex": "The school is near my home.",
+      "excn": "学校在我家附近。"
+    },
+    {
+      "day": "Day10",
+      "word": "here",
+      "mean": "这里",
+      "ex": "Come here.",
+      "excn": "过来这里。"
+    },
+    {
+      "day": "Day10",
+      "word": "there",
+      "mean": "那里",
+      "ex": "The book is there.",
+      "excn": "书在那里。"
+    },
+    {
+      "day": "Day10",
+      "word": "up",
+      "mean": "向上",
+      "ex": "Look up.",
+      "excn": "向上看。"
+    },
+    {
+      "day": "Day10",
+      "word": "down",
+      "mean": "向下",
+      "ex": "Sit down.",
+      "excn": "坐下。"
+    },
+    {
+      "day": "Day10",
+      "word": "left",
+      "mean": "左",
+      "ex": "Turn left.",
+      "excn": "向左转。"
+    },
+    {
+      "day": "Day10",
+      "word": "right",
+      "mean": "右",
+      "ex": "Turn right.",
+      "excn": "向右转。"
+    },
+    {
+      "day": "Day10",
+      "word": "front",
+      "mean": "前面",
+      "ex": "in front of the house",
+      "excn": "房子前面"
+    },
+    {
+      "day": "Day10",
+      "word": "back",
+      "mean": "后面",
+      "ex": "at the back of the room",
+      "excn": "房间后面"
+    },
+    {
+      "day": "Day10",
+      "word": "between",
+      "mean": "在…之间",
+      "ex": "between the book and the pen",
+      "excn": "在书和笔之间"
+    },
+    {
+      "day": "Day10",
+      "word": "with",
+      "mean": "和…一起",
+      "ex": "I go with you.",
+      "excn": "我和你一起去。"
+    },
+    {
+      "day": "Day10",
+      "word": "from",
+      "mean": "从；来自",
+      "ex": "I am from China.",
+      "excn": "我来自中国。"
+    },
+    {
+      "day": "Day10",
+      "word": "about",
+      "mean": "关于",
+      "ex": "a book about cats",
+      "excn": "一本关于猫的书"
     }
   ],
   "mistakes": [
