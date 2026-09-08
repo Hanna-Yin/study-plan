@@ -23,7 +23,9 @@
     "m10": "1",
     "e10": "1",
     "m11": "1",
-    "e11": "1"
+    "e11": "1",
+    "m12": "1",
+    "e12": "1"
   },
   "words": [
     {
@@ -1215,6 +1217,125 @@
       "mean": "答案",
       "ex": "The answer is right.",
       "excn": "答案对了。"
+    },
+    {
+      "day": "Day13",
+      "word": "eat",
+      "mean": "吃",
+      "ex": "I eat an apple.",
+      "excn": "我吃一个苹果。"
+    },
+    {
+      "day": "Day13",
+      "word": "drink",
+      "mean": "喝",
+      "ex": "I drink water.",
+      "excn": "我喝水。"
+    },
+    {
+      "day": "Day13",
+      "word": "sleep",
+      "mean": "睡",
+      "ex": "I sleep at night.",
+      "excn": "我晚上睡觉。"
+    },
+    {
+      "day": "Day13",
+      "word": "walk",
+      "mean": "走路",
+      "ex": "I walk to school.",
+      "excn": "我走路去学校。"
+    },
+    {
+      "day": "Day13",
+      "word": "run",
+      "mean": "跑",
+      "ex": "I run in the park.",
+      "excn": "我在公园跑步。"
+    },
+    {
+      "day": "Day13",
+      "word": "rest",
+      "mean": "休息",
+      "ex": "I rest after lunch.",
+      "excn": "午饭后我休息。"
+    },
+    {
+      "day": "Day13",
+      "word": "tired",
+      "mean": "累的",
+      "ex": "I am tired.",
+      "excn": "我累了。"
+    },
+    {
+      "day": "Day13",
+      "word": "hospital",
+      "mean": "医院",
+      "ex": "He is in the hospital.",
+      "excn": "他在医院。"
+    },
+    {
+      "day": "Day13",
+      "word": "water",
+      "mean": "水",
+      "ex": "I drink water.",
+      "excn": "我喝水。"
+    },
+    {
+      "day": "Day13",
+      "word": "food",
+      "mean": "食物",
+      "ex": "I like healthy food.",
+      "excn": "我喜欢健康的食物。"
+    },
+    {
+      "day": "Day13",
+      "word": "healthy",
+      "mean": "健康的",
+      "ex": "I am healthy.",
+      "excn": "我很健康。"
+    },
+    {
+      "day": "Day13",
+      "word": "exercise",
+      "mean": "锻炼",
+      "ex": "I exercise every day.",
+      "excn": "我每天锻炼。"
+    },
+    {
+      "day": "Day13",
+      "word": "fruit",
+      "mean": "水果",
+      "ex": "I eat fruit.",
+      "excn": "我吃水果。"
+    },
+    {
+      "day": "Day13",
+      "word": "vegetable",
+      "mean": "蔬菜",
+      "ex": "I eat vegetables.",
+      "excn": "我吃蔬菜。"
+    },
+    {
+      "day": "Day13",
+      "word": "doctor",
+      "mean": "医生",
+      "ex": "I see the doctor.",
+      "excn": "我看医生。"
+    },
+    {
+      "day": "Day13",
+      "word": "body",
+      "mean": "身体",
+      "ex": "I wash my body.",
+      "excn": "我洗身体。"
+    },
+    {
+      "day": "Day13",
+      "word": "medicine",
+      "mean": "药",
+      "ex": "I take medicine.",
+      "excn": "我吃药。"
     }
   ],
   "mistakes": [
