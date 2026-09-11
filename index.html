@@ -200,9 +200,11 @@
   <div class="tabs">
     <button class="tab-btn active" onclick="switchHist('math')">📐 高数回顾</button>
     <button class="tab-btn" onclick="switchHist('eng')">🔤 英语回顾</button>
+    <button class="tab-btn" onclick="switchHist('prob')">📝 我的题库</button>
   </div>
   <div id="histMath" class="tab-panel active"></div>
   <div id="histEng" class="tab-panel"></div>
+  <div id="histProb" class="tab-panel"></div>
 </div>
 
 <div class="card">
@@ -235,7 +237,8 @@ const math = [
  ["Day11","导数的概念：瞬时变化率 / 曲线切线斜率"],
  ["Day12","基本求导公式：幂函数、常数、eˣ 等"],
  ["Day13","导数的四则运算：加减、数乘、乘除"],
- ["Day14","复盘：重做本周错题，把仍不懂的整理给AI"]
+ ["Day14","复盘：重做本周错题，把仍不懂的整理给AI"],
+ ["Day15","导数的应用：单调性判定 + 极值（临界点 / 列表法）"]
 ];
 const eng = [
  ["Day1","背15个基础词 + AI造1句（如：I read a book. 逐词讲解）"],
@@ -251,7 +254,8 @@ const eng = [
  ["Day11","背15个基础词（时间/频率）+ AI造1句"],
  ["Day12","背15个基础词（学习进阶）+ AI造1句"],
  ["Day13","背15个基础词（生活/健康）+ AI造1句"],
- ["Day14","复习本周约90个词 + 读1段极简英文"]
+ ["Day14","复习本周约90个词 + 读1段极简英文"],
+ ["Day15","背15个基础词（家庭/人物）+ AI造1句"]
 ];
 
 // 每天详细内容：用于「学习回顾」与「每日练习」，全部离线可见
@@ -402,6 +406,17 @@ const days = [
   eng:{ summary:"复习本周约90个词 + 读1段极简英文",
     key:"把 Day8~Day13 的词过一遍，能认、能读句就达标。",
     ex:[] }
+ },
+ {
+  id:"Day15",
+  math:{ topic:"导数的应用②：单调性判定 + 极值",
+    summary:"用 f'(x) 的符号判升降：f'(x)>0 增、f'(x)<0 减（区间内挑具体数代入代值法）。让 f'(x)=0 解出临界点 x0，列表判断左右符号：左+右−→极大值，左−右+→极小值。",
+    key:"先求导 f'(x)，再解 f'(x)=0 找临界点，最后用代值法看临界点左右的符号变化。",
+    note:"极值只在 f'(x)=0 或不存在的点出现；但 f'(x)=0 不一定有极值（如 x³ 在 x=0 处 f'=0 却单调不减）。判断一定要看「左右符号变不变」。",
+    ex:[["f(x)=x²−4x+3，求最小值","f'(x)=2x−4=0→x=2；x<2递减、x>2递增→x=2 极小值=f(2)=−1"],["f(x)=x³−3x，f'(x)=3x²−3 的临界点","3x²−3=0→x=±1；x=−1 左+右−→极大，x=1 左−右+→极小"]] },
+  eng:{ summary:"今日15词：father 父亲 · mother 母亲 · brother 兄弟 · sister 姐妹 · parent 父母 · child 孩子 · family 家庭 · man 男人 · woman 女人 · boy 男孩 · girl 女孩 · people 人们 · baby 婴儿 · son 儿子 · daughter 女儿",
+    key:"围绕「家庭与人物」：This is my family. / The boy is my brother.",
+    ex:[["用今日词造1句（含 family 或 brother/sister）","This is my family. 这是我的家庭。 / The boy is my brother. 这个男孩是我弟弟。"]] }
  }
 ];
 
@@ -410,6 +425,7 @@ let progress = {};
 let mistakes = [];
 let words = [];
 let notes = [];
+let problems = [];
 let ghToken = localStorage.getItem('gh_token') || '';
 let ghRepo  = localStorage.getItem('gh_repo') || '';
 let ghSha   = localStorage.getItem('gh_sha') || '';
@@ -445,8 +461,9 @@ else mistakes = JSON.parse(localStorage.getItem('study_mistakes')||'[]');
 words = JSON.parse(localStorage.getItem('study_words')||'[]');
 notes = JSON.parse(localStorage.getItem('study_notes')||'[]');
 if(!localStorage.getItem('study_notes')){ notes = SEED_NOTES.slice(); localStorage.setItem('study_notes', JSON.stringify(notes)); }
+problems = JSON.parse(localStorage.getItem('study_problems')||'[]');
 
-function saveLocal(){ localStorage.setItem('study_progress', JSON.stringify(progress)); localStorage.setItem('study_mistakes', JSON.stringify(mistakes)); localStorage.setItem('study_words', JSON.stringify(words)); localStorage.setItem('study_notes', JSON.stringify(notes)); }
+function saveLocal(){ localStorage.setItem('study_progress', JSON.stringify(progress)); localStorage.setItem('study_mistakes', JSON.stringify(mistakes)); localStorage.setItem('study_words', JSON.stringify(words)); localStorage.setItem('study_notes', JSON.stringify(notes)); localStorage.setItem('study_problems', JSON.stringify(problems)); }
 function render(id, data, key){
   const box=document.getElementById(id); box.innerHTML='';
   data.forEach((d,i)=>{
@@ -469,9 +486,12 @@ function update(){
 function switchHist(t){
   document.getElementById('histMath').classList.toggle('active', t==='math');
   document.getElementById('histEng').classList.toggle('active', t==='eng');
+  document.getElementById('histProb').classList.toggle('active', t==='prob');
   const btns=document.querySelectorAll('#histCard .tab-btn');
   btns[0].classList.toggle('active', t==='math');
   btns[1].classList.toggle('active', t==='eng');
+  btns[2].classList.toggle('active', t==='prob');
+  if(t==='prob') renderProblems();
 }
 function switchLib(t){
   document.getElementById('libWords').classList.toggle('active', t==='words');
@@ -582,6 +602,29 @@ function addNote(){
   document.getElementById('ntTitle').value=''; document.getElementById('ntContent').value='';
 }
 function delNote(i){ if(confirm('删除这条重点笔记？')){ notes.splice(i,1); saveLocal(); renderNotes(); scheduleSync(); } }
+function renderProblems(){
+  const box=document.getElementById('histProb'); if(!box) return;
+  box.innerHTML='';
+  if(!problems.length){ box.innerHTML='<div class="mk-empty">还没有题目。每次你做的练习题，专家都会帮你整理进这里，方便随时回看、重做。</div>'; return; }
+  // 按学科分组
+  const order=[]; const groups={};
+  problems.forEach(n=>{ const c=n.subj||'其他'; if(!groups[c]){ groups[c]=[]; order.push(c); } groups[c].push(n); });
+  order.forEach(c=>{
+    const g=document.createElement('div'); g.className='note-group';
+    g.innerHTML='<div class="note-cat">'+esc(c)+'</div>';
+    groups[c].forEach(n=>{
+      const realIdx=problems.indexOf(n);
+      const el=document.createElement('div'); el.className='note-item';
+      const aid='pans'+realIdx;
+      el.innerHTML='<div class="note-top"><span class="note-title">'+esc(n.topic||'练习')+'</span></div>'+
+        '<div class="note-content">'+esc(n.q)+'</div>'+
+        '<button class="sec sm" onclick="tog(\''+aid+'\')">显示答案</button>'+
+        '<div class="note-content" id="'+aid+'" style="display:none"><b>答：</b>'+esc(n.a||'')+'</div>';
+      g.appendChild(el);
+    });
+    box.appendChild(g);
+  });
+}
 let wdSelectedDay='Day1';
 function wdRow(w){
   const realIdx=words.indexOf(w);
@@ -626,25 +669,26 @@ function renderWords(){
 }
 function resetAll(){ if(confirm('确定清空所有勾选（错题保留）？')){ progress={}; saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderHistory(); scheduleSync(); } }
 function exportData(){
-  const blob=new Blob([JSON.stringify({progress,mistakes,words,notes})],{type:'application/json'});
+  const blob=new Blob([JSON.stringify({progress,mistakes,words,notes,problems})],{type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='study-data.json'; a.click();
 }
 function importData(ev){
   const f=ev.target.files[0]; if(!f) return;
   const r=new FileReader(); r.onload=()=>{
-    try{ const o=JSON.parse(r.result); if(o.progress){progress=o.progress;} if(o.mistakes){mistakes=o.mistakes;} if(o.words){words=o.words;} if(o.notes){notes=o.notes;} saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderWords(); renderNotes(); alert('数据已导入'); }catch(e){ alert('文件格式不对'); }
+    try{ const o=JSON.parse(r.result); if(o.progress){progress=o.progress;} if(o.mistakes){mistakes=o.mistakes;} if(o.words){words=o.words;} if(o.notes){notes=o.notes;} if(o.problems){problems=o.problems;} saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderWords(); renderNotes(); renderProblems(); alert('数据已导入'); }catch(e){ alert('文件格式不对'); }
   }; r.readAsText(f);
 }
 
 // ---- 云同步（统一 study-data.json） ----
 function setStatus(t, cls){ const s=document.getElementById('syncStatus'); s.textContent=t; s.className='syncstatus '+cls; }
-function collectData(){ return {progress, mistakes, words, notes}; }
+function collectData(){ return {progress, mistakes, words, notes, problems}; }
 function applyData(d){
   if(d && d.progress){ progress=d.progress; }
   if(d && Array.isArray(d.mistakes)){ mistakes=d.mistakes; }
   if(d && Array.isArray(d.words)){ words=d.words; }
   if(d && Array.isArray(d.notes)){ notes=d.notes; }
-  saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises(); renderWords(); renderNotes();
+  if(d && Array.isArray(d.problems)){ problems=d.problems; }
+  saveLocal(); render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises(); renderWords(); renderNotes(); renderProblems();
 }
 async function ghUser(){
   const r=await fetch('https://api.github.com/user',{headers:{Authorization:'Bearer '+ghToken}});
@@ -719,7 +763,7 @@ function refreshSyncUI(){
     refreshSyncUI();
   }
 })();
-render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises(); renderWords(); renderNotes();
+render('math',math,'m'); render('eng',eng,'e'); update(); renderMistakes(); renderHistory(); renderExercises(); renderWords(); renderNotes(); renderProblems();
 </script>
 </body>
 </html>
